@@ -37,7 +37,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val apiInfrastructureModule = Kodein.Module(name = "apiInfrastructureModule") {
-    val BASE_URL = ""
+    val BASE_URL = "https://api.themoviedb.org/"
 
     val moshi by lazy {
         Moshi.Builder()
@@ -45,11 +45,11 @@ val apiInfrastructureModule = Kodein.Module(name = "apiInfrastructureModule") {
             .build()
     }
 
-    fun buildRetrofit(baseUrl: String, httpClient: OkHttpClient): Retrofit {
+    fun buildRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(httpClient)
-            .baseUrl(baseUrl)
+            .baseUrl(BASE_URL)
             .build()
     }
 
@@ -66,6 +66,6 @@ val apiInfrastructureModule = Kodein.Module(name = "apiInfrastructureModule") {
     bind<ResponseInterceptor>() with singleton { ResponseInterceptor() }
     bind<Retrofit>() with singleton {
         val httpClient: OkHttpClient = instance()
-            buildRetrofit(BASE_URL, httpClient)
+            buildRetrofit(httpClient)
     }
 }

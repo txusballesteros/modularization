@@ -22,25 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.api.instrumentation
+package com.txusballesteros.codelabs.billboard.api.nowplaying
 
-import okhttp3.Interceptor
-import okhttp3.Response
+import com.squareup.moshi.Json
+import com.txusballesteros.codelabs.billboard.api.model.MovieApiModel
 
-class AuthInterceptor : Interceptor {
-    companion object {
-        const val TOKEN = "683b07161137f9bf8666b3a86f2a3e78"
-        const val TOKEN_QUERY_PARAM = "api_key"
-    }
-
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val originalUrl = chain.request().url()
-        val finalUrl = originalUrl.newBuilder()
-            .addQueryParameter(TOKEN_QUERY_PARAM, TOKEN)
-            .build()
-        val finalRequest = chain.request()
-            .newBuilder()
-            .url(finalUrl).build()
-        return chain.proceed(finalRequest)
-    }
-}
+data class NowPlayingResponse(
+    val page: Int,
+    @Json(name = "results") val movies: List<MovieApiModel>
+)
