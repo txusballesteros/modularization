@@ -1,0 +1,21 @@
+apply from: "${rootDir}/buildsystem/android-module.gradle"
+apply plugin: "de.mannodermaus.android-junit5"
+
+dependencies {
+    implementation project(':common:threading')
+
+    implementation kotlin_JDK8
+    implementation kotlin_reflect
+    api jupiter_api
+    api jupiter_engine
+    api jupiter_params
+    api junit
+    api junit_vintage_engine
+    api mockito
+    api(mockito_kotlin) {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-runtime'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+        exclude group: 'org.mockito', module: 'mockito-core'
+    }
+}

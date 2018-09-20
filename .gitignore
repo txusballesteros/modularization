@@ -1,0 +1,72 @@
+# Copyright Txus Ballesteros 2018 (@txusballesteros)
+#
+# This file is part of Foobar.
+#
+# Foobar is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Foobar is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+
+# built androidApplication files
+*.apk
+*.ap_
+
+# lint folder
+lint
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+classes/
+gen-external-apklibs/
+
+# maven output folder
+target
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+.metadata
+.settings
+
+# IntelliJ files
+.idea
+*.iml
+
+# OSX files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# vi swap files
+*.swp
+
+# backup files
+*.bak
+
+# gradle directory
+.gradle
+gradlew.bat
+build/
+captures/
+/local.properties

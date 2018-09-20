@@ -1,0 +1,79 @@
+/*
+ * Copyright Txus Ballesteros 2018 (@txusballesteros)
+ *
+ * This file is part of some open source application.
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+ */
+ext {
+    constraint_version = "1.1.0"
+    coroutines_version = "0.23.1"
+    retrofit_version = "2.4.0"
+    okHttp_version = "3.10.0"
+    moshi_version = "1.6.0"
+    kodein_version = "5.2.0"
+    support_library_version = "27.0.2"
+    funktionale_version = "1.2"
+    anko_version = "0.10.5"
+    glide_version = "4.7.1"
+    support_version = "27.1.1"
+    moshi_version = "1.6.0"
+
+    mockito_core_version = "2.18.3"
+    mockito_kotlin_version = "1.5.0"
+    timber_version = "4.7.1"
+    junit_version="4.12"
+    jupiter_version = "5.2.0"
+
+    appCompat = "com.android.support:appcompat-v7:${support_version}"
+    design = "com.android.support:design:${support_version}"
+    appCompat = "com.android.support:appcompat-v7:${support_version}"
+    recycler_view = "com.android.support:recyclerview-v7:${support_version}"
+    support_annotations = "com.android.support:support-annotations:${support_version}"
+    card_view = "com.android.support:cardview-v7:${support_version}"
+    kotlin_JDK8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.kotlin_version}"
+    kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${project.kotlin_version}"
+    coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}"
+    coroutines_reactive = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${coroutines_version}"
+    retrofit = "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    retrofit_moshi_converter = "com.squareup.retrofit2:converter-moshi:${retrofit_version}"
+    okHttp = "com.squareup.okhttp3:okhttp:${okHttp_version}"
+    kodein = "org.kodein.di:kodein-di-generic-jvm:${kodein_version}"
+    option_monad = "org.funktionale:funktionale-option:${funktionale_version}"
+    try_monad = "org.funktionale:funktionale-try:${funktionale_version}"
+    anko_common = "org.jetbrains.anko:anko-common:${anko_version}"
+    anko_coroutines = "org.jetbrains.anko:anko-coroutines:${anko_version}"
+    constraint_layout = "com.android.support.constraint:constraint-layout:${constraint_version}"
+    glide = "com.github.bumptech.glide:glide:${glide_version}"
+    glide_processor = "com.github.bumptech.glide:compiler:${glide_version}"
+    moshi = "com.squareup.moshi:moshi:${moshi_version}"
+    moshi_kotlin = "com.squareup.moshi:moshi-kotlin:${moshi_version}"
+    moshi_adapters = "com.squareup.moshi:moshi-adapters:${moshi_version}"
+
+    mockito = "org.mockito:mockito-inline:${mockito_core_version}"
+    mockito_kotlin = "com.nhaarman:mockito-kotlin:${mockito_kotlin_version}"
+    mockito_core = "org.mockito:mockito-inline:${mockito_core_version}"
+    kotlin_test_junit = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
+    jupiter_api = "org.junit.jupiter:junit-jupiter-api:${jupiter_version}"
+    jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:${jupiter_version}"
+    jupiter_params = "org.junit.jupiter:junit-jupiter-params:${jupiter_version}"
+    junit_vintage_engine = "org.junit.vintage:junit-vintage-engine:${jupiter_version}"
+    junit = "junit:junit:${junit_version}"
+}
