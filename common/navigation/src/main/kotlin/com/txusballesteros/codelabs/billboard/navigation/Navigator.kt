@@ -27,16 +27,17 @@ package com.txusballesteros.codelabs.billboard.navigation
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import org.funktionale.tries.Try
 
 typealias Navigator = (context: Context?, navigationCommand: NavigationCommand) -> Try<Unit>
-typealias NavigationCommand = (schema: String) -> Intent
+typealias NavigationCommand = (schema: String) -> Uri
 
 private const val DEFAULT_SCHEMA = "komuti"
 
 internal val navigationImpl: Navigator = { context, navigationCommand ->
     context?.let {
-        val intent = navigationCommand(DEFAULT_SCHEMA)
+        val intent = navigationCommand(DEFAULT_SCHEMA).intent()
         whenSupportIntent(context, intent) {
             context.startActivity(intent)
             Try.Success(Unit)
@@ -44,6 +45,8 @@ internal val navigationImpl: Navigator = { context, navigationCommand ->
     }
     Try.Failure(IllegalStateException())
 }
+
+private fun Uri.intent() : Intent = Intent(Intent.ACTION_VIEW, this)
 
 private fun whenSupportIntent(context: Context, intent: Intent, block: () -> Unit) {
     if (intent.resolveActivity(context.packageManager) != null) {

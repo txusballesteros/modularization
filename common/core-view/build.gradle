@@ -33,5 +33,7 @@ dependencies {
     implementation coroutines_reactive
     implementation option_monad
     implementation anko_common
+    implementation glide
     api appCompat
+    api design
 }
