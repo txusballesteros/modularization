@@ -22,15 +22,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.api.movie
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import org.kodein.di.Kodein
+import com.txusballesteros.codelabs.billboard.api.model.MovieApiModel
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
+interface MovieRetrofitService {
+    @GET("3/movie/{movieId}")
+    fun get(
+        @Path("movieId") movieId: String,
+        @Query("language") language: String = "es-ES"
+    ) : Call<MovieApiModel>
 }

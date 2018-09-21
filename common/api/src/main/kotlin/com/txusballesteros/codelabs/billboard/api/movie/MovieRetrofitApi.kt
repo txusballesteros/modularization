@@ -22,15 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.api.movie
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import org.kodein.di.Kodein
+import com.txusballesteros.codelabs.billboard.api.BaseRetrofitApi
+import com.txusballesteros.codelabs.billboard.api.model.MovieApiModel
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
+class MovieRetrofitApi(
+    private val service: MovieRetrofitService
+) : MovieApi, BaseRetrofitApi() {
+
+    override fun getMovie(id: String): MovieApiModel = execute {
+        service.get(id)
+    }
 }
