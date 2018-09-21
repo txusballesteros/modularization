@@ -22,19 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: "${rootDir}/buildsystem/android-module.gradle"
-apply plugin: "de.mannodermaus.android-junit5"
+package com.txusballesteros.codelabs.billboard.navigation.command
 
-dependencies {
-    implementation project(':common:threading')
-    implementation project(':common:core')
-    implementation project(':common:core-view')
-    implementation project(':common:navigation')
+import android.net.Uri
+import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 
-    implementation kodein
-    implementation try_monad
-    implementation constraint_layout
-    implementation flexbox
-
-    testImplementation project(":common:core-testing")
+val youtubeNavigationCommand : (String) -> NavigationCommand = { videoId ->
+    val command: NavigationCommand = { _ ->
+        Uri.Builder()
+            .scheme("https")
+            .authority("youtube.com")
+            .path("watch")
+            .appendQueryParameter("v", videoId)
+            .build()
+    }
+    command
 }

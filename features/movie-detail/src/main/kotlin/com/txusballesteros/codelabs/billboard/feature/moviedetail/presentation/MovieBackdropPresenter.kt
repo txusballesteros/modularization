@@ -25,10 +25,16 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation
 
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import com.txusballesteros.codelabs.billboard.core.domain.usecase.video.GetMovieVideosUseCase
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
+import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
+import com.txusballesteros.codelabs.billboard.navigation.command.youtubeNavigationCommand
+import com.txusballesteros.codelabs.billboard.threading.perform
 
-class MovieBackdropPresenter : LifecyclePresenter<MovieBackdropPresenter.View>() {
+class MovieBackdropPresenter(
+    private val getMovieVideos: GetMovieVideosUseCase
+) : LifecyclePresenter<MovieBackdropPresenter.View>() {
 
     override fun onViewAttached() {
         view?.let { view ->
@@ -38,9 +44,33 @@ class MovieBackdropPresenter : LifecyclePresenter<MovieBackdropPresenter.View>()
         }
     }
 
+    fun onPlay() {
+        perform {
+            view?.let { view ->
+                getVideos(view.movie.id)
+                    .onSuccess { videos ->
+                        videos.filter { it.site?.toLowerCase() ?: "" == "youtube" }.firstOrNull()?.let { video ->
+                            video.key?.let {
+                                view.navigateTo(youtubeNavigationCommand(it))
+                            }
+                        }
+                    }
+                    .onFailure {
+                        view.renderVideoError()
+                    }
+            }
+        }
+    }
+
+    private suspend fun getVideos(movieId: String) = await {
+        getMovieVideos.execute(movieId)
+    }
+
     interface View : LifecycleView {
         val movie: Movie
 
         fun renderBackdrop(url: String)
+        fun renderVideoError()
+        fun navigateTo(command: NavigationCommand)
     }
 }

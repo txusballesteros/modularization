@@ -25,6 +25,7 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
 import com.txusballesteros.codelabs.billboard.core.view.extension.download
@@ -32,6 +33,8 @@ import com.txusballesteros.codelabs.billboard.core.view.extension.withArguments
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.di.featureComponent
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieBackdropPresenter
+import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
+import com.txusballesteros.codelabs.billboard.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_movie_backdrop.*
 import org.kodein.di.generic.instance
 import java.lang.IllegalArgumentException
@@ -49,6 +52,7 @@ class MovieBackdropFragment : BaseFragment(), MovieBackdropPresenter.View {
         get() = arguments?.getSerializable(ARGUMENT_MOVIE) as? Movie ?: throw IllegalArgumentException("The Movie argument can not be null.")
 
     private val presenter: MovieBackdropPresenter by featureComponent.instance()
+    private val navigate: Navigator by featureComponent.instance()
 
     override fun onRequestLayoutResourceId() = R.layout.fragment_movie_backdrop
 
@@ -56,5 +60,17 @@ class MovieBackdropFragment : BaseFragment(), MovieBackdropPresenter.View {
         presenter.onViewReady(this)
     }
 
+    override fun onSetupListeners() {
+        play.setOnClickListener { presenter.onPlay() }
+    }
+
     override fun renderBackdrop(url: String) = backdrop.download(url)
+
+    override fun renderVideoError() {
+        Snackbar.make(backdrop, R.string.no_videos, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun navigateTo(command: NavigationCommand) {
+        navigate(context, command)
+    }
 }

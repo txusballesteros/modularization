@@ -40,7 +40,7 @@ internal val featureModule = Kodein.Module(name = "MovieDetailFeatureModule") {
     bind<MovieRepository>() with  singleton { MovieRepository(instance()) }
     bind<GetMovieByIdUseCase>() with provider { GetMovieByIdUseCase(instance()) }
     bind<MovieDetailComposerPresenter>() with provider { MovieDetailComposerPresenter(instance()) }
-    bind<MovieBackdropPresenter>() with provider { MovieBackdropPresenter() }
+    bind<MovieBackdropPresenter>() with provider { MovieBackdropPresenter(instance()) }
     bind<MoviePosterPresenter>() with provider { MoviePosterPresenter() }
     bind<MovieRatingPresenter>() with provider { MovieRatingPresenter() }
     bind<MovieTitlePresenter>() with provider { MovieTitlePresenter() }

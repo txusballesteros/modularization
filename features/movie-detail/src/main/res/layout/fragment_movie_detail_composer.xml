@@ -40,14 +40,14 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <View
-        android:id="@+id/backdrop_decorator"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/backdrop_decorator"
-        app:layout_constraintBottom_toBottomOf="@+id/backdrop_holder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--<View-->
+        <!--android:id="@+id/backdrop_decorator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="@drawable/backdrop_decorator"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/backdrop_holder"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
     <FrameLayout
         android:id="@+id/poster_holder"

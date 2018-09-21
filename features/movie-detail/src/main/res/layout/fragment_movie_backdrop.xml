@@ -43,4 +43,20 @@
         tools:src="@drawable/poster"
         />
 
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="center"
+        android:clickable="true"
+        android:focusable="false"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_play_circle_outline_white_24dp"
+        android:background="@drawable/backdrop_decorator"
+        />
+
 </android.support.constraint.ConstraintLayout>

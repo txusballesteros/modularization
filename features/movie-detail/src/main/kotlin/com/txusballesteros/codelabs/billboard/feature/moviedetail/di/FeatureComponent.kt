@@ -25,9 +25,11 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.di
 
 import com.txusballesteros.codelabs.billboard.core.di.coreComponent
+import com.txusballesteros.codelabs.billboard.navigation.di.navigationModule
 import org.kodein.di.Kodein
 
 internal val featureComponent = Kodein {
     extend(coreComponent)
     import(featureModule)
+    import(navigationModule)
 }
