@@ -31,6 +31,7 @@ import com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.usecase
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieBackdropPresenter
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieDetailComposerPresenter
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MoviePosterPresenter
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieRatingPresenter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -44,4 +45,5 @@ internal val featureModule = Kodein.Module(name = "MovieDetailFeatureModule") {
     bind<MovieDetailComposerPresenter>() with provider { MovieDetailComposerPresenter(instance()) }
     bind<MovieBackdropPresenter>() with provider { MovieBackdropPresenter() }
     bind<MoviePosterPresenter>() with provider { MoviePosterPresenter() }
+    bind<MovieRatingPresenter>() with provider { MovieRatingPresenter() }
 }

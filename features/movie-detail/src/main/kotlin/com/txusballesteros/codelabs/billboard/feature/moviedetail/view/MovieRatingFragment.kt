@@ -25,42 +25,43 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
 
 import android.os.Bundle
+import android.view.View.GONE
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
-import com.txusballesteros.codelabs.billboard.core.view.extension.attach
+import com.txusballesteros.codelabs.billboard.core.view.extension.download
 import com.txusballesteros.codelabs.billboard.core.view.extension.withArguments
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.di.featureComponent
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieDetailComposerPresenter
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieBackdropPresenter
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MoviePosterPresenter
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieRatingPresenter
+import kotlinx.android.synthetic.main.fragment_movie_backdrop.*
+import kotlinx.android.synthetic.main.fragment_movie_poster.*
+import kotlinx.android.synthetic.main.fragment_movie_rating.*
 import org.kodein.di.generic.instance
+import java.lang.IllegalArgumentException
 
-class MovieDetailComposerFragment : BaseFragment(), MovieDetailComposerPresenter.View {
+class MovieRatingFragment : BaseFragment(), MovieRatingPresenter.View {
     companion object {
-        private const val ARGUMENT_ID = "argument:id"
+        private const val ARGUMENT_MOVIE = "argument:movie"
 
-        fun newInstance(id: String) = MovieDetailComposerFragment().withArguments(
-            ARGUMENT_ID to id
+        fun newInstance(movie: Movie) = MovieRatingFragment().withArguments(
+            ARGUMENT_MOVIE to movie
         )
     }
 
-    override val movieId: String
-        get() = arguments?.getString(ARGUMENT_ID) ?: throw IllegalArgumentException("The ID parameter can not be null.")
+    override val movie: Movie
+        get() = arguments?.getSerializable(ARGUMENT_MOVIE) as? Movie ?: throw IllegalArgumentException("The Movie argument can not be null.")
 
-    private val presenter : MovieDetailComposerPresenter by featureComponent.instance()
+    private val presenter: MovieRatingPresenter by featureComponent.instance()
 
-    override fun onRequestLayoutResourceId() = R.layout.fragment_movie_detail_composer
+    override fun onRequestLayoutResourceId() = R.layout.fragment_movie_rating
 
     override fun onViewReady(savedInstanceState: Bundle?) {
         presenter.onViewReady(this)
     }
 
-    override fun composeView(movie: Movie) {
-        attach(R.id.backdrop_holder, MovieBackdropFragment.newInstance(movie))
-        attach(R.id.poster_holder, MoviePosterFragment.newInstance(movie))
-        attach(R.id.rating, MovieRatingFragment.newInstance(movie))
-    }
-
-    override fun closeView() {
-        activity?.finish()
+    override fun renderRating(average: Float, count: Int) {
+        rating.text = getString(R.string.rating_pattern, average, count)
     }
 }
