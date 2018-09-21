@@ -29,7 +29,7 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.NowPlaying
 import org.funktionale.tries.Try
 
 class NowPlayingRepository(
-    private val cloudDataSource: NowPlayingDataSource
+    private val dataSource: NowPlayingDataSource
 ) {
-    fun getMovies() : Try<List<Movie>> = cloudDataSource.getMovies()
+    fun getMovies() : Try<List<Movie>> = dataSource.getMovies()
 }

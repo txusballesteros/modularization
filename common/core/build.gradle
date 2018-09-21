@@ -26,6 +26,8 @@ apply from: "${rootDir}/buildsystem/android-module.gradle"
 
 dependencies {
     api project(":common:api")
+    implementation project(":common:exceptions")
 
     implementation kodein
+    implementation try_monad
 }

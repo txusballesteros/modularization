@@ -22,23 +22,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.api.video
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
-import org.kodein.di.Kodein
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.Call
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+interface VideoRetrofitService {
+    @GET("3/movie/{movieId}/videos")
+    fun get(
+        @Path("movieId") movieId: String,
+        @Query("language") language: String = "es-ES"
+    ) : Call<VideoResponse>
 }

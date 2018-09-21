@@ -22,23 +22,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.core.domain.repository
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
-import org.kodein.di.Kodein
+import com.txusballesteros.codelabs.billboard.core.data.video.VideoDataSource
+import com.txusballesteros.codelabs.billboard.core.domain.model.Video
+import org.funktionale.tries.Try
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+class VideoRepository(
+    private val dataSource: VideoDataSource
+) {
+    fun getVideos(movieId: String) : Try<List<Video>> = dataSource.getVideos(movieId)
 }

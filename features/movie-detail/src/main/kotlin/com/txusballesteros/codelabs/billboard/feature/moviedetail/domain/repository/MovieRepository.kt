@@ -27,7 +27,7 @@ package com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.reposi
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.data.MovieDataSource
 
 class MovieRepository(
-    private val cloudDataSource: MovieDataSource
+    private val dataSource: MovieDataSource
 ) {
-    fun getMovie(id: String) = cloudDataSource.getMovie(id)
+    fun getMovie(id: String) = dataSource.getMovie(id)
 }

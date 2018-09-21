@@ -22,23 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.core.data.video
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
-import org.kodein.di.Kodein
+import com.txusballesteros.codelabs.billboard.api.video.VideoApi
+import com.txusballesteros.codelabs.billboard.core.domain.model.Video
+import com.txusballesteros.codelabs.billboard.core.domain.model.map
+import com.txusballesteros.codelabs.billboard.exceptions.NotFoundException
+import org.funktionale.tries.Try
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+class VideoCloudDataSource(
+    private val api: VideoApi
+) : VideoDataSource {
+    override fun getVideos(movieId: String): Try<List<Video>> = Try {
+        val videos = api.getVideos(movieId).videos.map { it.map() }
+        if (videos.isEmpty()) throw NotFoundException() else videos
+    }
 }

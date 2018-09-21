@@ -22,23 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.core.data.di
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
+import com.txusballesteros.codelabs.billboard.core.data.video.VideoCloudDataSource
+import com.txusballesteros.codelabs.billboard.core.data.video.VideoDataSource
 import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+internal val dataSoucresModule = Kodein.Module(name = "CoreDataSourcesModule") {
+    bind<VideoDataSource>() with provider { VideoCloudDataSource(instance()) }
 }
+

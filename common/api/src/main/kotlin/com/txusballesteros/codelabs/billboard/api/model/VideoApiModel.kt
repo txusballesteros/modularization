@@ -22,23 +22,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.api.model
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
-import org.kodein.di.Kodein
+import com.squareup.moshi.Json
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+data class VideoApiModel(
+    val id: String?,
+    val key: String?,
+    val name: String?,
+    val site: String?,
+    val type: Type?
+
+) {
+    enum class Type {
+        @Json(name = "Trailer") TRAILER,
+        @Json(name = "Teaser") TEASER,
+        @Json(name = "Clip") CLIP,
+        @Json(name = "Featurette") FEATURETTE
+    }
 }

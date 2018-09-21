@@ -22,23 +22,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.di
+package com.txusballesteros.codelabs.billboard.core.domain.model
 
-import com.txusballesteros.codelabs.billboard.api.di.apiInfrastructureModule
-import com.txusballesteros.codelabs.billboard.api.movie.di.movieApiModule
-import com.txusballesteros.codelabs.billboard.api.nowplaying.di.nowPlayingApiModule
-import com.txusballesteros.codelabs.billboard.api.video.di.videoApiModule
-import com.txusballesteros.codelabs.billboard.core.data.di.dataSoucresModule
-import com.txusballesteros.codelabs.billboard.core.domain.repository.di.repositoriesModule
-import com.txusballesteros.codelabs.billboard.core.domain.usecase.di.useCasesModule
-import org.kodein.di.Kodein
+import com.txusballesteros.codelabs.billboard.api.model.VideoApiModel
 
-internal val coreModule = Kodein.Module(name = "CoreModule") {
-    import(dataSoucresModule)
-    import(repositoriesModule)
-    import(useCasesModule)
-    import(apiInfrastructureModule)
-    import(nowPlayingApiModule)
-    import(movieApiModule)
-    import(videoApiModule)
+fun VideoApiModel.map() = map(this)
+fun VideoApiModel.Type.map() = map(this)
+
+@JvmName("VideoApiModelMapper")
+private fun map(source: VideoApiModel) = Video(
+    id = source.id,
+    key = source.key,
+    name = source.name,
+    site = source.site,
+    type = source.type?.map()
+)
+
+@JvmName("VideoApiModelTypeMapper")
+private fun map(source: VideoApiModel.Type) = when(source) {
+    VideoApiModel.Type.TRAILER -> Video.Type.TRAILER
+    VideoApiModel.Type.TEASER -> Video.Type.TEASER
+    VideoApiModel.Type.CLIP -> Video.Type.CLIP
+    VideoApiModel.Type.FEATURETTE -> Video.Type.FEATURETTE
 }
