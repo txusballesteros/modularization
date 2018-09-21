@@ -22,13 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.data
+
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import org.funktionale.tries.Try
+
+interface MovieDataSource {
+    fun getMovie(id: String) : Try<Movie>
+}

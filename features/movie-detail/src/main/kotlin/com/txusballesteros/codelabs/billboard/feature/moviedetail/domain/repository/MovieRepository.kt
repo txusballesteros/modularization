@@ -22,13 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.repository
+
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.data.MovieDataSource
+
+class MovieRepository(
+    private val cloudDataSource: MovieDataSource
+) {
+    fun getMovie(id: String) = cloudDataSource.getMovie(id)
+}

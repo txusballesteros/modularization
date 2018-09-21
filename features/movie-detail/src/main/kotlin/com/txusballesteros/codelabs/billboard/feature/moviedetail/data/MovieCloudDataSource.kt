@@ -22,13 +22,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.data
+
+import com.txusballesteros.codelabs.billboard.api.movie.MovieApi
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import com.txusballesteros.codelabs.billboard.core.domain.model.map
+import org.funktionale.tries.Try
+
+class MovieCloudDataSource(
+    private val api: MovieApi
+) : MovieDataSource {
+
+    override fun getMovie(id: String): Try<Movie> = Try {
+        api.getMovie(id).map()
+    }
+}

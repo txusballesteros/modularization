@@ -22,13 +22,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+apply from: "${rootDir}/buildsystem/android-module.gradle"
+apply plugin: "de.mannodermaus.android-junit5"
+
+dependencies {
+    implementation project(':common:threading')
+    implementation project(':common:core')
+    implementation project(':common:core-view')
+
+    implementation kodein
+    implementation try_monad
+    implementation constraint_layout
+
+    testImplementation project(":common:core-testing")
+}

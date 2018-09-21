@@ -60,6 +60,7 @@ dependencies {
     implementation project(":common:core-view")
     implementation project(":common:threading")
     implementation project(":features:now-playing")
+    implementation project(":features:movie-detail")
 
     implementation anko_coroutines
 }

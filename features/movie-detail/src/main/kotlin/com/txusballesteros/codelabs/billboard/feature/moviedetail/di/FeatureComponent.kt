@@ -22,13 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.di
+
+import com.txusballesteros.codelabs.billboard.core.di.coreComponent
+import org.kodein.di.Kodein
+
+internal val featureComponent = Kodein {
+    extend(coreComponent)
+    import(featureModule)
+}

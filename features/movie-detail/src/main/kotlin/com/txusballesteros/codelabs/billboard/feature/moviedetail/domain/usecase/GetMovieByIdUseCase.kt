@@ -22,13 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.usecase
+
+import com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.repository.MovieRepository
+
+class GetMovieByIdUseCase(
+    private val repository: MovieRepository
+) {
+    fun execute(id: String) = repository.getMovie(id)
+}

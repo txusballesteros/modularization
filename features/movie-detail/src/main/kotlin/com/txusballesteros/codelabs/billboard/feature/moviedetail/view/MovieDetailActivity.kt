@@ -22,13 +22,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-include ':app'
-include 'common:core'
-include 'common:core-testing'
-include 'common:api'
-include 'common:navigation'
-include 'common:exceptions'
-include 'common:threading'
-include 'common:core-view'
-include 'features:now-playing'
-include 'features:movie-detail'
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
+
+import com.txusballesteros.codelabs.billboard.core.view.BaseActivity
+
+class MovieDetailActivity : BaseActivity() {
+    private val movieId: String
+        get() = intent.data?.getQueryParameter("id") ?: throw IllegalArgumentException("The ID parameter can not be null.")
+
+    override fun onRequestFragment() = MovieDetailComposerFragment.newInstance(movieId)
+}
