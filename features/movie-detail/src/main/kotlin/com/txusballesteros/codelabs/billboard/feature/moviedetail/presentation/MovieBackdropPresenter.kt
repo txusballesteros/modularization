@@ -22,20 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.domain.model
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation
 
-import java.io.Serializable
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
+import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
 
-data class Movie(
-    val id: String,
-    val originalTitle: String,
-    val originalLanguage: String,
-    val title: String,
-    val overview: String,
-    val releaseDate: String,
-    val hasVideo: Boolean,
-    val backdrop: String?,
-    val poster: String?,
-    val voteCount: Int,
-    val voteAverage: Float
-) : Serializable
+class MovieBackdropPresenter : LifecyclePresenter<MovieBackdropPresenter.View>() {
+
+    override fun onViewAttached() {
+        view?.let { view ->
+            view.movie.backdrop?.let { backdrop ->
+                view.renderBackdrop(backdrop)
+            }
+        }
+    }
+
+    interface View : LifecycleView {
+        val movie: Movie
+
+        fun renderBackdrop(url: String)
+    }
+}

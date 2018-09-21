@@ -26,27 +26,23 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <FrameLayout
-        android:id="@+id/backdrop_holder"
+    <ImageView
+        android:id="@+id/poster"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:foreground="@drawable/poster_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <FrameLayout
-        android:id="@+id/poster_holder"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/backdrop_holder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backdrop_holder"
+        tools:src="@drawable/poster"
+        android:elevation="4dp"
         />
 
 </android.support.constraint.ConstraintLayout>
