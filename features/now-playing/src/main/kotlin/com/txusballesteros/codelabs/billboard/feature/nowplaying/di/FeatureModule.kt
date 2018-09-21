@@ -26,7 +26,8 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.di
 
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.NowPlayingCloudDataSource
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.NowPlayingDataSource
-import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.NowPlayingRepository
+import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.repository.NowPlayingRepository
+import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.usecase.GetNowPlayingMoviesUseCase
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation.NowPlayingPresenter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -36,6 +37,11 @@ import org.kodein.di.generic.singleton
 
 internal val featureModule = Kodein.Module(name = "NowPlayingFeatureModule") {
     bind<NowPlayingDataSource>() with provider { NowPlayingCloudDataSource(instance()) }
-    bind<NowPlayingRepository>() with singleton { NowPlayingRepository(instance()) }
+    bind<NowPlayingRepository>() with singleton {
+        NowPlayingRepository(
+            instance()
+        )
+    }
     bind<NowPlayingPresenter>() with provider { NowPlayingPresenter(instance()) }
+    bind<GetNowPlayingMoviesUseCase>() with provider { GetNowPlayingMoviesUseCase(instance()) }
 }

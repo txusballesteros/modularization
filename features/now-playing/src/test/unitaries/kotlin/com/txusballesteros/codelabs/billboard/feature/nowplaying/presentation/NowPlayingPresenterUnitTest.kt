@@ -28,22 +28,22 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.codelabs.billboard.core.testing.UnitTest
-import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.NowPlayingRepository
+import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.usecase.GetNowPlayingMoviesUseCase
 import org.funktionale.tries.Try
 import org.junit.jupiter.api.Test
 
 internal class NowPlayingPresenterUnitTest : UnitTest() {
     private lateinit var presenter: NowPlayingPresenter
     private val viewMock: NowPlayingPresenter.View = mock()
-    private val repositoryMock: NowPlayingRepository = mock()
+    private val getNowPlayingMoviesMock: GetNowPlayingMoviesUseCase = mock()
 
     override fun onPrepareTest() {
-        presenter = NowPlayingPresenter(repositoryMock)
+        presenter = NowPlayingPresenter(getNowPlayingMoviesMock)
     }
 
     @Test
     fun `render now playing movies list`() {
-        whenever(repositoryMock.getMovies()).thenReturn(Try.Success(listOf()))
+        whenever(getNowPlayingMoviesMock.execute()).thenReturn(Try.Success(listOf()))
 
         presenter.onViewReady(viewMock)
 
@@ -52,7 +52,7 @@ internal class NowPlayingPresenterUnitTest : UnitTest() {
 
     @Test
     fun `render error`() {
-        whenever(repositoryMock.getMovies()).thenReturn(Try.Failure(IllegalArgumentException()))
+        whenever(getNowPlayingMoviesMock.execute()).thenReturn(Try.Failure(IllegalArgumentException()))
 
         presenter.onViewReady(viewMock)
 

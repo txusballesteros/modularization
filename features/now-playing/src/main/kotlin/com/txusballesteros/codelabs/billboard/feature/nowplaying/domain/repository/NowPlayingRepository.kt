@@ -22,7 +22,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.feature.nowplaying.domain
+package com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.repository
 
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.NowPlayingDataSource

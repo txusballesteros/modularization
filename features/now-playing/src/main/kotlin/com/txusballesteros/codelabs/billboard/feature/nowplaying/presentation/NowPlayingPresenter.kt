@@ -27,25 +27,25 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
-import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.NowPlayingRepository
+import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.usecase.GetNowPlayingMoviesUseCase
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.command.movieDetailNavigationCommand
 import com.txusballesteros.codelabs.billboard.threading.perform
 
 class NowPlayingPresenter(
-    private val repository: NowPlayingRepository
+    private val getNowPlayingMovies: GetNowPlayingMoviesUseCase
 ) : LifecyclePresenter<NowPlayingPresenter.View>() {
 
     override fun onViewAttached() {
         perform {
-            getMovies()
+            getNowPlayingMovies()
                 .onSuccess { movies -> view?.renderMovies(movies) }
                 .onFailure { view?.renderError() }
         }
     }
 
-    private suspend fun getMovies() = await {
-        repository.getMovies()
+    private suspend fun getNowPlayingMovies() = await {
+        getNowPlayingMovies.execute()
     }
 
     fun onMovieTap(movie: Movie) {
