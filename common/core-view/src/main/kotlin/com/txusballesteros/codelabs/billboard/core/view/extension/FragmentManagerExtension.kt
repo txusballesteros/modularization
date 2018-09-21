@@ -54,7 +54,7 @@ fun FragmentManager.add(@IdRes placeHolder: Int, fragment: Fragment) {
         val tag = getTag(fragment::class)
         beginTransaction()
             .add(placeHolder, fragment, tag)
-            .commitNow()
+            .commit()
     }
 }
 
@@ -62,14 +62,14 @@ fun FragmentManager.attach(@IdRes placeHolder: Int, fragment: Fragment) {
     val tag = getTag(fragment::class)
     beginTransaction()
         .replace(placeHolder, fragment, tag)
-        .commitNowAllowingStateLoss()
+        .commit()
 }
 
 
 fun FragmentManager.remove(fragment: Fragment) {
     beginTransaction()
         .remove(fragment)
-        .commitNow()
+        .commit()
 }
 
 fun getTag(type: KClass<*>) = type.java.name

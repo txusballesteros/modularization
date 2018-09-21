@@ -40,6 +40,15 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <View
+        android:id="@+id/backdrop_decorator"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/backdrop_decorator"
+        app:layout_constraintBottom_toBottomOf="@+id/backdrop_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <FrameLayout
         android:id="@+id/poster_holder"
         android:layout_width="100dp"
@@ -51,16 +60,45 @@
         />
 
     <FrameLayout
-        android:id="@+id/rating"
+        android:id="@+id/rating_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/backdrop_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_height="20dp"
+        tools:layout_width="100dp" />
+
+    <FrameLayout
+        android:id="@+id/title_holder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/poster_holder"
-        app:layout_constraintTop_toBottomOf="@+id/backdrop_holder"
-        tools:layout_height="20dp"
-        tools:layout_width="100dp" />
+        app:layout_constraintTop_toBottomOf="@+id/backdrop_holder" />
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poster_holder">
+
+        <FrameLayout
+            android:id="@+id/overview_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            />
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>
