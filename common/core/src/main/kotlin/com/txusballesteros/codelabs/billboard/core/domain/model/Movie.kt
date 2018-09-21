@@ -37,5 +37,12 @@ data class Movie(
     val backdrop: String?,
     val poster: String?,
     val voteCount: Int,
-    val voteAverage: Float
-) : Serializable
+    val voteAverage: Float,
+    val genres: List<Genre>
+) : Serializable {
+
+    data class Genre (
+        val id: Int?,
+        val name: String?
+    ) : Serializable
+}

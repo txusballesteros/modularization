@@ -29,7 +29,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#ffffffff</color>
-    <color name="grey_1">#ff333333</color>
-    <color name="grey_2">#ffAEAEAE</color>
-    <color name="grey_3">#ffF3F3F3</color>
+    <color name="grey_1">#ff282828</color>
+    <color name="grey_2">#ff424242</color>
+    <color name="grey_3">#ffAEAEAE</color>
+    <color name="grey_4">#ffF3F3F3</color>
 </resources>

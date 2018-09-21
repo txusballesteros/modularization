@@ -22,18 +22,23 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: "${rootDir}/buildsystem/android-module.gradle"
-apply plugin: "de.mannodermaus.android-junit5"
+package com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation
 
-dependencies {
-    implementation project(':common:threading')
-    implementation project(':common:core')
-    implementation project(':common:core-view')
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
+import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
 
-    implementation kodein
-    implementation try_monad
-    implementation constraint_layout
-    implementation flexbox
+class MovieGenresPresenter : LifecyclePresenter<MovieGenresPresenter.View>() {
 
-    testImplementation project(":common:core-testing")
+    override fun onViewAttached() {
+        view?.let { view ->
+            view.renderGenres(view.movie.genres)
+        }
+    }
+
+    interface View : LifecycleView {
+        val movie: Movie
+
+        fun renderGenres(genres: List<Movie.Genre>)
+    }
 }

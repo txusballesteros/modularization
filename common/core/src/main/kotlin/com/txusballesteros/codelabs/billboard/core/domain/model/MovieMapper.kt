@@ -27,9 +27,10 @@ package com.txusballesteros.codelabs.billboard.core.domain.model
 import com.txusballesteros.codelabs.billboard.api.model.MovieApiModel
 
 fun MovieApiModel.map() = map(this)
+fun MovieApiModel.Genre.map() = map(this)
 
 @JvmName(name = "MovieApiModelMapper")
-fun map(source: MovieApiModel) = Movie(
+internal fun map(source: MovieApiModel) = Movie(
     id = source.id.toString(),
     originalTitle = source.originalTitle,
     originalLanguage = source.originalLanguage,
@@ -40,5 +41,12 @@ fun map(source: MovieApiModel) = Movie(
     backdrop = source.backdrop,
     poster = source.poster,
     voteCount = source.voteCount,
-    voteAverage = source.voteAverage
+    voteAverage = source.voteAverage,
+    genres = source.genres?.map { it.map() } ?: listOf()
+)
+
+@JvmName(name = "MovieApiModelGenreMapper")
+internal fun map(source: MovieApiModel.Genre) = Movie.Genre(
+    id = source.id,
+    name = source.name
 )

@@ -45,4 +45,5 @@ internal val featureModule = Kodein.Module(name = "MovieDetailFeatureModule") {
     bind<MovieRatingPresenter>() with provider { MovieRatingPresenter() }
     bind<MovieTitlePresenter>() with provider { MovieTitlePresenter() }
     bind<MovieOverviewPresenter>() with provider { MovieOverviewPresenter() }
+    bind<MovieGenresPresenter>() with provider { MovieGenresPresenter() }
 }

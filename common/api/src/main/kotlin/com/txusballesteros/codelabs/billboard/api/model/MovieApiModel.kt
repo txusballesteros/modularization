@@ -37,5 +37,12 @@ data class MovieApiModel(
     @Json(name = "backdrop_path") val backdrop: String?,
     @Json(name = "poster_path") val poster: String?,
     @Json(name = "vote_count") val voteCount: Int,
-    @Json(name = "vote_average") val voteAverage: Float
-)
+    @Json(name = "vote_average") val voteAverage: Float,
+    val genres: List<Genre>?
+) {
+
+    data class Genre (
+        val id: Int?,
+        val name: String?
+    )
+}

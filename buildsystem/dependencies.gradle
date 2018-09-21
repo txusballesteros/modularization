@@ -35,6 +35,7 @@ ext {
     glide_version = "4.7.1"
     support_version = "27.1.1"
     moshi_version = "1.6.0"
+    flexbox_version = "1.0.0"
 
     mockito_core_version = "2.18.3"
     mockito_kotlin_version = "1.5.0"
@@ -66,6 +67,7 @@ ext {
     moshi = "com.squareup.moshi:moshi:${moshi_version}"
     moshi_kotlin = "com.squareup.moshi:moshi-kotlin:${moshi_version}"
     moshi_adapters = "com.squareup.moshi:moshi-adapters:${moshi_version}"
+    flexbox = "com.google.android:flexbox:${flexbox_version}"
 
     mockito = "org.mockito:mockito-inline:${mockito_core_version}"
     mockito_kotlin = "com.nhaarman:mockito-kotlin:${mockito_kotlin_version}"
