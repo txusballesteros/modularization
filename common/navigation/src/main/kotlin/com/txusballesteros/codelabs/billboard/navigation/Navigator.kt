@@ -33,7 +33,7 @@ import org.funktionale.tries.Try
 typealias Navigator = (context: Context?, navigationCommand: NavigationCommand) -> Try<Unit>
 typealias NavigationCommand = (schema: String) -> Uri
 
-private const val DEFAULT_SCHEMA = "komuti"
+private const val DEFAULT_SCHEMA = "billboard"
 
 internal val navigationImpl: Navigator = { context, navigationCommand ->
     context?.let {
