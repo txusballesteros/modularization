@@ -22,11 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.feature.moviedetail.data
+package com.txusballesteros.codelabs.billboard.core.domain.repository
 
-import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
-import org.funktionale.tries.Try
+import com.txusballesteros.codelabs.billboard.core.data.movie.MovieDataSource
 
-interface MovieDataSource {
-    fun getMovie(id: String) : Try<Movie>
+class MovieRepository(
+    private val dataSource: MovieDataSource
+) {
+    fun getMovie(id: String) = dataSource.getMovie(id)
 }

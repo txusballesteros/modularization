@@ -27,7 +27,7 @@ package com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.usecase.GetMovieByIdUseCase
+import com.txusballesteros.codelabs.billboard.core.domain.usecase.movie.GetMovieByIdUseCase
 import com.txusballesteros.codelabs.billboard.threading.perform
 
 class MovieDetailComposerPresenter(

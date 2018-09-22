@@ -24,21 +24,13 @@
  */
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.di
 
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.data.MovieCloudDataSource
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.data.MovieDataSource
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.repository.MovieRepository
-import com.txusballesteros.codelabs.billboard.feature.moviedetail.domain.usecase.GetMovieByIdUseCase
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
 
 internal val featureModule = Kodein.Module(name = "MovieDetailFeatureModule") {
-    bind<MovieDataSource>() with provider { MovieCloudDataSource(instance()) }
-    bind<MovieRepository>() with  singleton { MovieRepository(instance()) }
-    bind<GetMovieByIdUseCase>() with provider { GetMovieByIdUseCase(instance()) }
     bind<MovieDetailComposerPresenter>() with provider { MovieDetailComposerPresenter(instance()) }
     bind<MovieBackdropPresenter>() with provider { MovieBackdropPresenter(instance()) }
     bind<MoviePosterPresenter>() with provider { MoviePosterPresenter() }

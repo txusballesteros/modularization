@@ -24,6 +24,7 @@
  */
 package com.txusballesteros.codelabs.billboard.core.domain.repository.di
 
+import com.txusballesteros.codelabs.billboard.core.domain.repository.MovieRepository
 import com.txusballesteros.codelabs.billboard.core.domain.repository.VideoRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -32,4 +33,5 @@ import org.kodein.di.generic.singleton
 
 internal val repositoriesModule = Kodein.Module(name = "CoreRepositoriesModule") {
     bind<VideoRepository>() with singleton { VideoRepository(instance()) }
+    bind<MovieRepository>() with  singleton { MovieRepository(instance()) }
 }

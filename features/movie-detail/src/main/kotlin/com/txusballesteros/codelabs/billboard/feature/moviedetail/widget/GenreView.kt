@@ -32,6 +32,7 @@ import android.widget.TextView
 import com.google.android.flexbox.FlexboxLayout
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 
+@Suppress("DEPRECATION")
 class GenreView @JvmOverloads constructor(
     context: Context?,
     attr: AttributeSet? = null,
@@ -39,15 +40,16 @@ class GenreView @JvmOverloads constructor(
 ) : TextView(context, attr, defStyleAttr) {
     companion object {
         private const val MARGIN_END_IN_DP = 8f
+        private const val NO_MARGIN = 0
     }
 
     init {
-        val parmas = FlexboxLayout.LayoutParams(
+        layoutParams = FlexboxLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        parmas.setMargins(0, 0, dp2px(MARGIN_END_IN_DP).toInt(), 0)
-        layoutParams = parmas
+        ).apply {
+            setMargins(NO_MARGIN, NO_MARGIN, dp2px(MARGIN_END_IN_DP).toInt(), NO_MARGIN)
+        }
         background = resources.getDrawable(R.drawable.genre_pill, null)
         setTextSize(
             TypedValue.COMPLEX_UNIT_PX,

@@ -24,6 +24,8 @@
  */
 package com.txusballesteros.codelabs.billboard.core.data.di
 
+import com.txusballesteros.codelabs.billboard.core.data.movie.MovieCloudDataSource
+import com.txusballesteros.codelabs.billboard.core.data.movie.MovieDataSource
 import com.txusballesteros.codelabs.billboard.core.data.video.VideoCloudDataSource
 import com.txusballesteros.codelabs.billboard.core.data.video.VideoDataSource
 import org.kodein.di.Kodein
@@ -33,5 +35,6 @@ import org.kodein.di.generic.provider
 
 internal val dataSoucresModule = Kodein.Module(name = "CoreDataSourcesModule") {
     bind<VideoDataSource>() with provider { VideoCloudDataSource(instance()) }
+    bind<MovieDataSource>() with provider { MovieCloudDataSource(instance()) }
 }
 
