@@ -23,7 +23,6 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
 apply from: "${rootDir}/buildsystem/android-module.gradle"
-apply plugin: "de.mannodermaus.android-junit5"
 
 dependencies {
     implementation project(':common:threading')
