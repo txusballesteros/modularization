@@ -27,6 +27,7 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.view
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.R
@@ -34,6 +35,7 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.di.featureCompo
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation.NowPlayingPresenter
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.Navigator
+import com.txusballesteros.codelabs.billboard.navigation.command.movieDetailNavigationCommand
 import kotlinx.android.synthetic.main.fragmnet_now_playing.*
 import org.kodein.di.generic.instance
 
@@ -45,6 +47,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     private lateinit var adapter: NowPlayingAdapter
     private val navigate: Navigator by featureComponent.instance()
     private val presenter: NowPlayingPresenter by featureComponent.instance()
+    private var sharedView: View? = null
 
     override fun onRequestLayoutResourceId() = R.layout.fragmnet_now_playing
 
@@ -56,7 +59,8 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     private fun setupList() {
         val columns = resources.getInteger(R.integer.now_playing_columns)
         val layoutManager = GridLayoutManager(context, columns, GridLayoutManager.VERTICAL, false)
-        adapter = NowPlayingAdapter { movie ->
+        adapter = NowPlayingAdapter { view, movie ->
+            sharedView = view
             presenter.onMovieTap(movie)
         }
         list.layoutManager = layoutManager
@@ -72,7 +76,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
         Snackbar.make(root, R.string.now_playing_error, Snackbar.LENGTH_SHORT).show()
     }
 
-    override fun navigateTo(command: NavigationCommand) {
-        navigate(context, command)
+    override fun navigateToMovieDetail(id: String) {
+        navigate(this, movieDetailNavigationCommand(id, sharedView))
     }
 }

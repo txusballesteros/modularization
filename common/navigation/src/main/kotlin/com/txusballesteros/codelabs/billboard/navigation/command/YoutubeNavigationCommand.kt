@@ -25,16 +25,18 @@
 package com.txusballesteros.codelabs.billboard.navigation.command
 
 import android.net.Uri
+import com.txusballesteros.codelabs.billboard.navigation.Command
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 
 val youtubeNavigationCommand : (String) -> NavigationCommand = { videoId ->
-    val command: NavigationCommand = { _ ->
-        Uri.Builder()
+    val navigationCommand: NavigationCommand = { _ ->
+        val uri = Uri.Builder()
             .scheme("https")
             .authority("youtube.com")
             .path("watch")
             .appendQueryParameter("v", videoId)
             .build()
+        Command(uri)
     }
-    command
+    navigationCommand
 }

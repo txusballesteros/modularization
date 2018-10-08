@@ -49,12 +49,12 @@ class NowPlayingPresenter(
     }
 
     fun onMovieTap(movie: Movie) {
-        view?.navigateTo(movieDetailNavigationCommand(movie.id))
+        view?.navigateToMovieDetail(movie.id)
     }
 
     interface View : LifecycleView {
         fun renderMovies(movies: List<Movie>)
         fun renderError()
-        fun navigateTo(command: NavigationCommand)
+        fun navigateToMovieDetail(id: String)
     }
 }

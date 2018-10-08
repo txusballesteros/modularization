@@ -25,15 +25,22 @@
 package com.txusballesteros.codelabs.billboard.navigation.command
 
 import android.net.Uri
+import android.view.View
+import com.txusballesteros.codelabs.billboard.navigation.Command
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
+import com.txusballesteros.codelabs.billboard.navigation.NavigationSharedElement
 
-val movieDetailNavigationCommand : (String) -> NavigationCommand = { movieId ->
-    val command: NavigationCommand = { scheme ->
-        Uri.Builder()
+val movieDetailNavigationCommand : (String, View?) -> NavigationCommand = { movieId, sharedView ->
+    val navigationCommand: NavigationCommand = { scheme ->
+        val uri = Uri.Builder()
             .scheme(scheme)
             .authority("movie-detail")
             .appendQueryParameter("id", movieId)
             .build()
+        Command(
+            uri = uri,
+            sharedElements = sharedView?.let {  listOf(NavigationSharedElement("poster", sharedView)) } ?: listOf()
+        )
     }
-    command
+    navigationCommand
 }

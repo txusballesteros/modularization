@@ -22,19 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
+package com.txusballesteros.codelabs.billboard.navigation
 
-import android.os.Bundle
-import com.txusballesteros.codelabs.billboard.core.view.BaseActivity
+import android.view.View
 
-class MovieDetailActivity : BaseActivity() {
-    private val movieId: String
-        get() = intent.data?.getQueryParameter("id") ?: throw IllegalArgumentException("The ID parameter can not be null.")
-
-    override fun onRequestFragment() = MovieDetailComposerFragment.newInstance(movieId)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        supportPostponeEnterTransition()
-        super.onCreate(savedInstanceState)
-    }
-}
+data class NavigationSharedElement(
+    val key: String,
+    val view: View
+)

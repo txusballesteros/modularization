@@ -24,29 +24,46 @@
  */
 package com.txusballesteros.codelabs.billboard.navigation
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.Fragment
 import org.funktionale.tries.Try
 
-typealias Navigator = (context: Context?, navigationCommand: NavigationCommand) -> Try<Unit>
-typealias NavigationCommand = (schema: String) -> Uri
+typealias Navigator = (fragment: Fragment, navigationCommand: NavigationCommand) -> Try<Unit>
+typealias NavigationCommand = (schema: String) -> Command
 
 private const val DEFAULT_SCHEMA = "billboard"
 
-internal val navigationImpl: Navigator = { context, navigationCommand ->
-    context?.let {
-        val intent = navigationCommand(DEFAULT_SCHEMA).intent()
-        whenSupportIntent(context, intent) {
-            context.startActivity(intent)
+internal val navigationImpl: Navigator = { fragment, navigationCommand ->
+    fragment.activity?.let { activity ->
+        val command = navigationCommand(DEFAULT_SCHEMA)
+        val intent = command.toIntent()
+        val intentOptions = command.toIntentOptions(activity)
+        whenSupportIntent(activity, intent) {
+            if (intentOptions == null) {
+                activity.startActivity(intent)
+            } else {
+                activity.startActivity(intent, intentOptions.toBundle())
+            }
             Try.Success(Unit)
         }
     }
     Try.Failure(IllegalStateException())
 }
 
-private fun Uri.intent() : Intent = Intent(Intent.ACTION_VIEW, this)
+private fun Command.toIntent(): Intent = Intent(Intent.ACTION_VIEW, this.uri)
+
+private fun Command.toIntentOptions(activity: Activity) : ActivityOptionsCompat? {
+    return if (this.sharedElements.isNotEmpty()) {
+        val elements = sharedElements.map { android.support.v4.util.Pair(it.view, it.key) }.toTypedArray()
+        ActivityOptionsCompat.makeSceneTransitionAnimation(activity, *elements)
+    } else {
+        null
+    }
+}
 
 private fun whenSupportIntent(context: Context, intent: Intent, block: () -> Unit) {
     if (intent.resolveActivity(context.packageManager) != null) {

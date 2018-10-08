@@ -55,12 +55,19 @@ class MoviePosterFragment : BaseFragment(), MoviePosterPresenter.View {
 
     override fun onRequestLayoutResourceId() = R.layout.fragment_movie_poster
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        activity?.supportPostponeEnterTransition()
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewReady(savedInstanceState: Bundle?) {
         presenter.onViewReady(this)
     }
 
     override fun renderPoster(url: String) {
-        poster.download(url)
+        poster.download(url) {
+            activity?.supportStartPostponedEnterTransition()
+        }
     }
 
     override fun hide() {
