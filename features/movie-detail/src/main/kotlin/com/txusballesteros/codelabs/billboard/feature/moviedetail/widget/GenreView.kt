@@ -25,6 +25,7 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.widget
 
 import android.content.Context
+import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
@@ -37,7 +38,7 @@ class GenreView @JvmOverloads constructor(
     context: Context?,
     attr: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : TextView(context, attr, defStyleAttr) {
+) : AppCompatTextView(context, attr, defStyleAttr) {
     companion object {
         private const val MARGIN_END_IN_DP = 8f
         private const val NO_MARGIN = 0

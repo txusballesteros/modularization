@@ -62,5 +62,6 @@ dependencies {
     implementation project(":features:now-playing")
     implementation project(":features:movie-detail")
 
+    implementation kotlin_JDK8
     implementation anko_coroutines
 }

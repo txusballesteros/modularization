@@ -24,6 +24,6 @@
 * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <resources>
-    <string name="rating_pattern">%.1f de %d Votos</string>
+    <string name="rating_pattern" formatted="false">%.1f de %d Valoraciones</string>
     <string name="no_videos">There are not videos for this movie.</string>
 </resources>

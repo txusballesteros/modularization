@@ -26,7 +26,7 @@ apply from: "${rootDir}/buildsystem/build.gradle"
 apply from: "${rootDir}/buildsystem/dependencies.gradle"
 
 buildscript {
-    ext.kotlin_version = "1.2.70"
+    ext.kotlin_version = "1.2.71"
     ext.gradle_version = "3.2.0"
     ext.android_junit5_version = "1.2.0.0"
 
