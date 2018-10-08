@@ -34,7 +34,7 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.R
 import kotlinx.android.synthetic.main.item_now_playing.view.*
 
 class NowPlayingAdapter(
-    private val onItemTap: (Movie) -> Unit
+    private val onItemTap: (View, Movie) -> Unit
 ) : RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>() {
 
     private val cache = mutableListOf<Movie>()
@@ -54,7 +54,7 @@ class NowPlayingAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
         val movie = cache[position]
         posterView.download(movie.poster)
-        mainView.setOnClickListener { onItemTap(movie) }
+        mainView.setOnClickListener { onItemTap(posterView, movie) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

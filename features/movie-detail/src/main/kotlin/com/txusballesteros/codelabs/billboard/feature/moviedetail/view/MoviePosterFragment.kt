@@ -60,7 +60,9 @@ class MoviePosterFragment : BaseFragment(), MoviePosterPresenter.View {
     }
 
     override fun renderPoster(url: String) {
-        poster.download(url)
+        poster.download(url) {
+            activity?.supportStartPostponedEnterTransition()
+        }
     }
 
     override fun hide() {

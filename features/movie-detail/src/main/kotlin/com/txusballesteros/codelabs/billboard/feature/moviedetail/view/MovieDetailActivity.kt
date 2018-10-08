@@ -24,6 +24,7 @@
  */
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
 
+import android.os.Bundle
 import com.txusballesteros.codelabs.billboard.core.view.BaseActivity
 
 class MovieDetailActivity : BaseActivity() {
@@ -31,4 +32,9 @@ class MovieDetailActivity : BaseActivity() {
         get() = intent.data?.getQueryParameter("id") ?: throw IllegalArgumentException("The ID parameter can not be null.")
 
     override fun onRequestFragment() = MovieDetailComposerFragment.newInstance(movieId)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        supportPostponeEnterTransition()
+        super.onCreate(savedInstanceState)
+    }
 }

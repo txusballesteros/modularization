@@ -27,6 +27,7 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.view
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.R
@@ -45,6 +46,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     private lateinit var adapter: NowPlayingAdapter
     private val navigate: Navigator by featureComponent.instance()
     private val presenter: NowPlayingPresenter by featureComponent.instance()
+    private lateinit var sharedView: View
 
     override fun onRequestLayoutResourceId() = R.layout.fragmnet_now_playing
 
@@ -56,7 +58,8 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     private fun setupList() {
         val columns = resources.getInteger(R.integer.now_playing_columns)
         val layoutManager = GridLayoutManager(context, columns, GridLayoutManager.VERTICAL, false)
-        adapter = NowPlayingAdapter { movie ->
+        adapter = NowPlayingAdapter { view, movie ->
+            sharedView = view
             presenter.onMovieTap(movie)
         }
         list.layoutManager = layoutManager
@@ -73,6 +76,6 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     }
 
     override fun navigateTo(command: NavigationCommand) {
-        navigate(context, command)
+        navigate(this, command, sharedView)
     }
 }

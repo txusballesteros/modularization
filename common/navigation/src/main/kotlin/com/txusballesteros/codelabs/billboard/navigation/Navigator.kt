@@ -24,29 +24,41 @@
  */
 package com.txusballesteros.codelabs.billboard.navigation
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.Fragment
+import android.view.View
 import org.funktionale.tries.Try
 
-typealias Navigator = (context: Context?, navigationCommand: NavigationCommand) -> Try<Unit>
+typealias Navigator = (fragment: Fragment, navigationCommand: NavigationCommand, sharedView: View?) -> Try<Unit>
 typealias NavigationCommand = (schema: String) -> Uri
 
 private const val DEFAULT_SCHEMA = "billboard"
 
-internal val navigationImpl: Navigator = { context, navigationCommand ->
-    context?.let {
+internal val navigationImpl: Navigator = { fragment, navigationCommand, sharedView ->
+    fragment.activity?.let { activity ->
         val intent = navigationCommand(DEFAULT_SCHEMA).intent()
-        whenSupportIntent(context, intent) {
-            context.startActivity(intent)
+        whenSupportIntent(activity, intent) {
+            if (sharedView != null) {
+                val intentOptions = prepareIntentOptions(activity, sharedView)
+                activity.startActivity(intent, intentOptions.toBundle())
+            } else {
+                activity.startActivity(intent)
+            }
             Try.Success(Unit)
         }
     }
     Try.Failure(IllegalStateException())
 }
 
-private fun Uri.intent() : Intent = Intent(Intent.ACTION_VIEW, this)
+private fun prepareIntentOptions(activity: Activity, sharedView: View) =
+    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, "poster")
+
+private fun Uri.intent(): Intent = Intent(Intent.ACTION_VIEW, this)
 
 private fun whenSupportIntent(context: Context, intent: Intent, block: () -> Unit) {
     if (intent.resolveActivity(context.packageManager) != null) {
