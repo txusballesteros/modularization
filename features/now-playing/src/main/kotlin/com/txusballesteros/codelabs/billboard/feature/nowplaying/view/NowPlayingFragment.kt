@@ -35,6 +35,7 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.di.featureCompo
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation.NowPlayingPresenter
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.Navigator
+import com.txusballesteros.codelabs.billboard.navigation.command.movieDetailNavigationCommand
 import kotlinx.android.synthetic.main.fragmnet_now_playing.*
 import org.kodein.di.generic.instance
 
@@ -46,7 +47,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     private lateinit var adapter: NowPlayingAdapter
     private val navigate: Navigator by featureComponent.instance()
     private val presenter: NowPlayingPresenter by featureComponent.instance()
-    private lateinit var sharedView: View
+    private var sharedView: View? = null
 
     override fun onRequestLayoutResourceId() = R.layout.fragmnet_now_playing
 
@@ -75,7 +76,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
         Snackbar.make(root, R.string.now_playing_error, Snackbar.LENGTH_SHORT).show()
     }
 
-    override fun navigateTo(command: NavigationCommand) {
-        navigate(this, command, sharedView)
+    override fun navigateToMovieDetail(id: String) {
+        navigate(this, movieDetailNavigationCommand(id, sharedView))
     }
 }

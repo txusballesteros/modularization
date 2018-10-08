@@ -71,6 +71,6 @@ class MovieBackdropFragment : BaseFragment(), MovieBackdropPresenter.View {
     }
 
     override fun navigateTo(command: NavigationCommand) {
-        navigate(this, command, null)
+        navigate(this, command)
     }
 }

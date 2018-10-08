@@ -22,21 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.navigation.command
+package com.txusballesteros.codelabs.billboard.navigation
 
 import android.net.Uri
-import com.txusballesteros.codelabs.billboard.navigation.Command
-import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 
-val youtubeNavigationCommand : (String) -> NavigationCommand = { videoId ->
-    val navigationCommand: NavigationCommand = { _ ->
-        val uri = Uri.Builder()
-            .scheme("https")
-            .authority("youtube.com")
-            .path("watch")
-            .appendQueryParameter("v", videoId)
-            .build()
-        Command(uri)
-    }
-    navigationCommand
-}
+data class Command(
+    val uri: Uri,
+    val sharedElements: List<NavigationSharedElement> = listOf()
+)

@@ -28,26 +28,25 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
-import android.view.View
 import org.funktionale.tries.Try
 
-typealias Navigator = (fragment: Fragment, navigationCommand: NavigationCommand, sharedView: View?) -> Try<Unit>
-typealias NavigationCommand = (schema: String) -> Uri
+typealias Navigator = (fragment: Fragment, navigationCommand: NavigationCommand) -> Try<Unit>
+typealias NavigationCommand = (schema: String) -> Command
 
 private const val DEFAULT_SCHEMA = "billboard"
 
-internal val navigationImpl: Navigator = { fragment, navigationCommand, sharedView ->
+internal val navigationImpl: Navigator = { fragment, navigationCommand ->
     fragment.activity?.let { activity ->
-        val intent = navigationCommand(DEFAULT_SCHEMA).intent()
+        val command = navigationCommand(DEFAULT_SCHEMA)
+        val intent = command.toIntent()
+        val intentOptions = command.toIntentOptions(activity)
         whenSupportIntent(activity, intent) {
-            if (sharedView != null) {
-                val intentOptions = prepareIntentOptions(activity, sharedView)
-                activity.startActivity(intent, intentOptions.toBundle())
-            } else {
+            if (intentOptions == null) {
                 activity.startActivity(intent)
+            } else {
+                activity.startActivity(intent, intentOptions.toBundle())
             }
             Try.Success(Unit)
         }
@@ -55,10 +54,16 @@ internal val navigationImpl: Navigator = { fragment, navigationCommand, sharedVi
     Try.Failure(IllegalStateException())
 }
 
-private fun prepareIntentOptions(activity: Activity, sharedView: View) =
-    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, "poster")
+private fun Command.toIntent(): Intent = Intent(Intent.ACTION_VIEW, this.uri)
 
-private fun Uri.intent(): Intent = Intent(Intent.ACTION_VIEW, this)
+private fun Command.toIntentOptions(activity: Activity) : ActivityOptionsCompat? {
+    return if (this.sharedElements.isNotEmpty()) {
+        val elements = sharedElements.map { android.support.v4.util.Pair(it.view, it.key) }.toTypedArray()
+        ActivityOptionsCompat.makeSceneTransitionAnimation(activity, *elements)
+    } else {
+        null
+    }
+}
 
 private fun whenSupportIntent(context: Context, intent: Intent, block: () -> Unit) {
     if (intent.resolveActivity(context.packageManager) != null) {
