@@ -22,16 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.domain.repository.di
+package com.txusballesteros.codelabs.billboard.core.data.datasource.video
 
-import com.txusballesteros.codelabs.billboard.core.domain.repository.MovieRepository
-import com.txusballesteros.codelabs.billboard.core.domain.repository.VideoRepository
-import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
+import com.txusballesteros.codelabs.billboard.core.domain.model.Video
+import org.funktionale.tries.Try
 
-internal val repositoriesModule = Kodein.Module(name = "CoreRepositoriesModule") {
-    bind<VideoRepository>() with singleton { VideoRepository(instance()) }
-    bind<MovieRepository>() with  singleton { MovieRepository(instance()) }
+interface VideoDataSource {
+    fun getVideos(movieId: String): Try<List<Video>>
 }

@@ -22,14 +22,28 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.domain.repository
+package com.txusballesteros.codelabs.billboard.core.domain.mapper
 
-import com.txusballesteros.codelabs.billboard.core.data.video.VideoDataSource
+import com.txusballesteros.codelabs.billboard.api.model.VideoApiModel
 import com.txusballesteros.codelabs.billboard.core.domain.model.Video
-import org.funktionale.tries.Try
 
-class VideoRepository(
-    private val dataSource: VideoDataSource
-) {
-    fun getVideos(movieId: String) : Try<List<Video>> = dataSource.getVideos(movieId)
+fun VideoApiModel.map() = map(this)
+fun VideoApiModel.Type.map() = map(this)
+
+@JvmName("VideoApiModelMapper")
+private fun map(source: VideoApiModel) =
+    Video(
+        id = source.id,
+        key = source.key,
+        name = source.name,
+        site = source.site,
+        type = source.type?.map()
+    )
+
+@JvmName("VideoApiModelTypeMapper")
+private fun map(source: VideoApiModel.Type) = when(source) {
+    VideoApiModel.Type.TRAILER -> Video.Type.TRAILER
+    VideoApiModel.Type.TEASER -> Video.Type.TEASER
+    VideoApiModel.Type.CLIP -> Video.Type.CLIP
+    VideoApiModel.Type.FEATURETTE -> Video.Type.FEATURETTE
 }

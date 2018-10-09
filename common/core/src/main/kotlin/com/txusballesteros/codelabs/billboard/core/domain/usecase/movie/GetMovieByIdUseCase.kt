@@ -24,7 +24,7 @@
  */
 package com.txusballesteros.codelabs.billboard.core.domain.usecase.movie
 
-import com.txusballesteros.codelabs.billboard.core.domain.repository.MovieRepository
+import com.txusballesteros.codelabs.billboard.core.data.repository.MovieRepository
 
 class GetMovieByIdUseCase(
     private val repository: MovieRepository

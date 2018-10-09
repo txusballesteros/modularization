@@ -22,11 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.data.video
+package com.txusballesteros.codelabs.billboard.core.data.datasource.di
 
-import com.txusballesteros.codelabs.billboard.core.domain.model.Video
-import org.funktionale.tries.Try
+import com.txusballesteros.codelabs.billboard.core.data.datasource.movie.MovieCloudDataSource
+import com.txusballesteros.codelabs.billboard.core.data.datasource.movie.MovieDataSource
+import com.txusballesteros.codelabs.billboard.core.data.datasource.video.VideoCloudDataSource
+import com.txusballesteros.codelabs.billboard.core.data.datasource.video.VideoDataSource
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 
-interface VideoDataSource {
-    fun getVideos(movieId: String): Try<List<Video>>
+internal val dataSoucresModule = Kodein.Module(name = "CoreDataSourcesModule") {
+    bind<VideoDataSource>() with provider { VideoCloudDataSource(instance()) }
+    bind<MovieDataSource>() with provider { MovieCloudDataSource(instance()) }
 }
+

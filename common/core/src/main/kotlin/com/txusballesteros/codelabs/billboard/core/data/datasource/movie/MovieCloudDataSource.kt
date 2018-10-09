@@ -22,19 +22,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.data.di
+package com.txusballesteros.codelabs.billboard.core.data.datasource.movie
 
-import com.txusballesteros.codelabs.billboard.core.data.movie.MovieCloudDataSource
-import com.txusballesteros.codelabs.billboard.core.data.movie.MovieDataSource
-import com.txusballesteros.codelabs.billboard.core.data.video.VideoCloudDataSource
-import com.txusballesteros.codelabs.billboard.core.data.video.VideoDataSource
-import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
+import com.txusballesteros.codelabs.billboard.api.movie.MovieApi
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
+import com.txusballesteros.codelabs.billboard.core.domain.mapper.map
+import org.funktionale.tries.Try
 
-internal val dataSoucresModule = Kodein.Module(name = "CoreDataSourcesModule") {
-    bind<VideoDataSource>() with provider { VideoCloudDataSource(instance()) }
-    bind<MovieDataSource>() with provider { MovieCloudDataSource(instance()) }
+class MovieCloudDataSource(
+    private val api: MovieApi
+) : MovieDataSource {
+
+    override fun getMovie(id: String): Try<Movie> = Try {
+        api.getMovie(id).map()
+    }
 }
-

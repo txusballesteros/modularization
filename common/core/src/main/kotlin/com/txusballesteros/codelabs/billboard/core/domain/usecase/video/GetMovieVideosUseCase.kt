@@ -25,7 +25,7 @@
 package com.txusballesteros.codelabs.billboard.core.domain.usecase.video
 
 import com.txusballesteros.codelabs.billboard.core.domain.model.Video
-import com.txusballesteros.codelabs.billboard.core.domain.repository.VideoRepository
+import com.txusballesteros.codelabs.billboard.core.data.repository.VideoRepository
 import org.funktionale.tries.Try
 
 class GetMovieVideosUseCase(

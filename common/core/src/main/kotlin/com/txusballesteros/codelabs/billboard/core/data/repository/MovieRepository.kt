@@ -22,31 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.domain.model
+package com.txusballesteros.codelabs.billboard.core.data.repository
 
-import com.txusballesteros.codelabs.billboard.api.model.MovieApiModel
+import com.txusballesteros.codelabs.billboard.core.data.datasource.movie.MovieDataSource
 
-fun MovieApiModel.map() = map(this)
-fun MovieApiModel.Genre.map() = map(this)
-
-@JvmName(name = "MovieApiModelMapper")
-internal fun map(source: MovieApiModel) = Movie(
-    id = source.id.toString(),
-    originalTitle = source.originalTitle,
-    originalLanguage = source.originalLanguage,
-    title = source.title,
-    overview = source.overview,
-    releaseDate = source.releaseDate,
-    hasVideo = source.hasVideo,
-    backdrop = source.backdrop,
-    poster = source.poster,
-    voteCount = source.voteCount,
-    voteAverage = source.voteAverage,
-    genres = source.genres?.map { it.map() } ?: listOf()
-)
-
-@JvmName(name = "MovieApiModelGenreMapper")
-internal fun map(source: MovieApiModel.Genre) = Movie.Genre(
-    id = source.id,
-    name = source.name
-)
+class MovieRepository(
+    private val dataSource: MovieDataSource
+) {
+    fun getMovie(id: String) = dataSource.getMovie(id)
+}

@@ -26,7 +26,7 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.data
 
 import com.txusballesteros.codelabs.billboard.api.nowplaying.NowPlayingApi
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
-import com.txusballesteros.codelabs.billboard.core.domain.model.map
+import com.txusballesteros.codelabs.billboard.core.domain.mapper.map
 import org.funktionale.tries.Try
 
 class NowPlayingCloudDataSource(

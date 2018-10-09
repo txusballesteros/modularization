@@ -22,19 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.core.data.video
+package com.txusballesteros.codelabs.billboard.core.data.datasource.movie
 
-import com.txusballesteros.codelabs.billboard.api.video.VideoApi
-import com.txusballesteros.codelabs.billboard.core.domain.model.Video
-import com.txusballesteros.codelabs.billboard.core.domain.model.map
-import com.txusballesteros.codelabs.billboard.exceptions.NotFoundException
+import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import org.funktionale.tries.Try
 
-class VideoCloudDataSource(
-    private val api: VideoApi
-) : VideoDataSource {
-    override fun getVideos(movieId: String): Try<List<Video>> = Try {
-        val videos = api.getVideos(movieId).videos.map { it.map() }
-        if (videos.isEmpty()) throw NotFoundException() else videos
-    }
+interface MovieDataSource {
+    fun getMovie(id: String) : Try<Movie>
 }
