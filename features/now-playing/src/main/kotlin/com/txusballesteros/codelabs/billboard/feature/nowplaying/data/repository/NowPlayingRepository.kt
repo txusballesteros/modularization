@@ -22,10 +22,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.repository
+package com.txusballesteros.codelabs.billboard.feature.nowplaying.data.repository
 
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
-import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.NowPlayingDataSource
+import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.datasource.NowPlayingDataSource
 import org.funktionale.tries.Try
 
 class NowPlayingRepository(

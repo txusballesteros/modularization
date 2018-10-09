@@ -22,18 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.codelabs.billboard.feature.nowplaying.data
+package com.txusballesteros.codelabs.billboard.feature.nowplaying.data.datasource
 
-import com.txusballesteros.codelabs.billboard.api.nowplaying.NowPlayingApi
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
-import com.txusballesteros.codelabs.billboard.core.domain.mapper.map
 import org.funktionale.tries.Try
 
-class NowPlayingCloudDataSource(
-    private val api: NowPlayingApi
-) : NowPlayingDataSource {
-
-    override fun getMovies(): Try<List<Movie>> = Try {
-        api.getNowPlayingMovies().movies.map { it.map() }
-    }
+interface NowPlayingDataSource {
+    fun getMovies() : Try<List<Movie>>
 }
