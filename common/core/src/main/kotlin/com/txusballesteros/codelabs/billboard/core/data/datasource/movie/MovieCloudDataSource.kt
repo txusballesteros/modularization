@@ -29,7 +29,7 @@ import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.domain.mapper.map
 import org.funktionale.tries.Try
 
-class MovieCloudDataSource(
+internal class MovieCloudDataSource(
     private val api: MovieApi
 ) : MovieDataSource {
 

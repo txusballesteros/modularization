@@ -30,7 +30,7 @@ import com.txusballesteros.codelabs.billboard.core.domain.mapper.map
 import com.txusballesteros.codelabs.billboard.exceptions.NotFoundException
 import org.funktionale.tries.Try
 
-class VideoCloudDataSource(
+internal class VideoCloudDataSource(
     private val api: VideoApi
 ) : VideoDataSource {
     override fun getVideos(movieId: String): Try<List<Video>> = Try {
