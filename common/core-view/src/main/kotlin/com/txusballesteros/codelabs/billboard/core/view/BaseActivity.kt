@@ -28,14 +28,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.txusballesteros.codelabs.billboard.core.view.extension.attach
-import com.txusballesteros.codelabs.billboard.core.view.callback.OnBackPressed
 
 abstract class BaseActivity : AppCompatActivity() {
-    private val fragmentsCount: Int
-        get() = supportFragmentManager.fragments?.size ?: 0
-
-    private val hasFragments: Boolean
-        get() = (fragmentsCount > 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +39,4 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun onRequestFragment(): Fragment
-
-    override fun onBackPressed() {
-        if (hasFragments) {
-            var attended = false
-            supportFragmentManager.fragments?.forEach { childFragment ->
-                if (childFragment is OnBackPressed) {
-                    attended = childFragment.onBackPressed()
-                }
-            }
-            if (!attended) super.onBackPressed()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }

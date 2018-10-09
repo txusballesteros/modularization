@@ -33,21 +33,6 @@ import org.jetbrains.anko.bundleOf
 fun Fragment.attach(@IdRes placeHolder: Int, fragment: Fragment) =
     childFragmentManager.attach(placeHolder, fragment)
 
-fun Fragment.remove(fragment: Fragment) =
-    childFragmentManager.remove(fragment)
-
-inline fun <reified T : Fragment> Fragment.findById(@IdRes id: Int, block: (T) -> Unit) =
-    childFragmentManager.findFragmentById(id)?.let { block(it as T) }
-
-inline fun <reified T : Fragment> Fragment.findByTag(block: (T) -> Unit) =
-    childFragmentManager.findByTag<T> { block(it) }
-
-inline fun <reified T : Fragment> Fragment.findByTag(): Option<T> =
-    childFragmentManager.findByTag()
-
-inline fun <reified T : Fragment> Fragment.findByTagOrNull(): T? =
-    childFragmentManager.findByTagOrNull()
-
 fun Fragment.add(@IdRes placeHolder: Int, fragment: Fragment) =
     childFragmentManager.add(placeHolder, fragment)
 
@@ -55,6 +40,3 @@ fun <T : Fragment> T.withArguments(vararg arguments: Pair<String, Any?>): T {
     this.arguments = bundleOf(*arguments)
     return this
 }
-
-fun Fragment.dp2px(value: Float): Float =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, resources.displayMetrics)
