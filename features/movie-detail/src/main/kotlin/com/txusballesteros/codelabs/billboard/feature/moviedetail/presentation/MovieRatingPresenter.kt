@@ -30,7 +30,7 @@ import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePr
 
 class MovieRatingPresenter : LifecyclePresenter<MovieRatingPresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         view?.let { view ->
             view.renderRating(view.movie.voteAverage, view.movie.voteCount)
         }

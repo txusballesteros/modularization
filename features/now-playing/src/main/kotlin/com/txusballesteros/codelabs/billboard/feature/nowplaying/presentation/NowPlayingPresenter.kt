@@ -36,7 +36,7 @@ class NowPlayingPresenter(
     private val getNowPlayingMovies: GetNowPlayingMoviesUseCase
 ) : LifecyclePresenter<NowPlayingPresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         perform {
             getNowPlayingMovies()
                 .onSuccess { movies -> view?.renderMovies(movies) }

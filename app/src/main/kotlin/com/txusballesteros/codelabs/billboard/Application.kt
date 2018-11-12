@@ -27,8 +27,9 @@ package com.txusballesteros.codelabs.billboard
 import android.app.Application
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_BG
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_MAIN
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newFixedThreadPoolContext
 
 class Application : Application() {
     override fun onCreate() {
@@ -36,8 +37,9 @@ class Application : Application() {
         initializeThreading()
     }
 
+    @ObsoleteCoroutinesApi
     private fun initializeThreading() {
-        APPLICATION_MAIN = UI
+        APPLICATION_MAIN = Dispatchers.Main
         APPLICATION_BG = newFixedThreadPoolContext(2 * Runtime.getRuntime().availableProcessors(), "bg")
     }
 }

@@ -30,7 +30,7 @@ import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePr
 
 class MovieTitlePresenter : LifecyclePresenter<MovieTitlePresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         view?.let { view ->
             view.renderTitle(view.movie.title)
             view.renderOriginalTitle(view.movie.originalTitle)

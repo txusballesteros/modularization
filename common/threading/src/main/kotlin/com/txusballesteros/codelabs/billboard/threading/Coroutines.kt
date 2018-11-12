@@ -24,43 +24,25 @@
  */
 package com.txusballesteros.codelabs.billboard.threading
 
-import com.txusballesteros.codelabs.billboard.exceptions.ViewDestroyedException
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlin.coroutines.experimental.Continuation
-import kotlin.coroutines.experimental.CoroutineContext
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlin.coroutines.CoroutineContext
 
 lateinit var APPLICATION_MAIN: CoroutineContext
 lateinit var APPLICATION_BG: CoroutineContext
 
-fun perform(block: suspend CoroutineScope.() -> Unit) =
-        launch(APPLICATION_MAIN + CoroutineExceptionHandler { _, throwable ->
-            if (throwable is JobCancellationException) {
-                if (throwable.cause !is ViewDestroyedException) throw throwable
-            } else {
-                throw throwable
-            }
-        }) { block() }
-
-fun <T> bg(block: suspend CoroutineScope.() -> T): Deferred<T> {
-    val process= async(context = APPLICATION_BG) { block() }
-    process.invokeOnCompletion { error -> error?.let { perform { throw it } } }
-    return process
+fun perform(block: suspend CoroutineScope.() -> Unit) {
+    CoroutineScope(APPLICATION_MAIN + CoroutineExceptionHandler { _, throwable ->
+        if (throwable !is CancellationException) {
+            throw throwable
+        }
+    }).launch { block() }
 }
 
-
-suspend fun <T> waitUntil(block: (Continuation<T>) -> Unit) = suspendCoroutine<T> { block(it) }
-
-fun subscribe(block: suspend () -> Unit) = perform {
-    bg {
-        block()
-    }
+fun <T> ReceiveChannel<T>.finish() {
+    this.cancel()
 }
 
-fun <T> ReceiveChannel<T>.subscribe(block: (T) -> Unit) {
-    perform {
-        bg { consumeEach { value -> block(value) } }.invokeOnCompletion { e -> e?.let { throw e } }
-    }
+fun Job.finish() {
+    this.cancel()
 }

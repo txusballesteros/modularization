@@ -34,7 +34,7 @@ class MovieDetailComposerPresenter(
     private val getMovieById: GetMovieByIdUseCase
 ) : LifecyclePresenter<MovieDetailComposerPresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         perform {
             view?.let { view ->
                 getMovie(view.movieId)

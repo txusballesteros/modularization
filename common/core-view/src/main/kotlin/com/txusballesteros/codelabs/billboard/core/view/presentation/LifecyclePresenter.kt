@@ -25,53 +25,56 @@
 package com.txusballesteros.codelabs.billboard.core.view.presentation
 
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
-import com.txusballesteros.codelabs.billboard.exceptions.ViewDestroyedException
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_BG
+import com.txusballesteros.codelabs.billboard.threading.finish
 import com.txusballesteros.codelabs.billboard.threading.perform
-import kotlinx.coroutines.experimental.CoroutineScope
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlin.coroutines.CoroutineContext
 
-abstract class LifecyclePresenter<T : LifecycleView> {
+abstract class LifecyclePresenter<T : LifecycleView> : CoroutineScope {
     protected var view: T? = null
     private val disposable = Job()
 
     private val lifecycle: ReceiveChannel<LifecycleView.Lifecycle>?
         get() = view?.lifecycle
 
-    fun onViewReady(view: T) {
+    override val coroutineContext: CoroutineContext
+        get() = APPLICATION_BG + disposable
+
+    fun onViewReady(view: T, firstTime: Boolean = false) {
         this.view = view
         subscribeToViewLifecycle()
-        onViewAttached()
+        onViewAttached(firstTime)
     }
 
-    protected fun onViewDestroyed() {}
-
     private fun subscribeToViewLifecycle() {
-        async(context = APPLICATION_BG, parent = disposable) {
+        async {
             lifecycle?.consumeEach {
                 if (it == LifecycleView.Lifecycle.DESTROYED) {
+                    onViewDestroyed()
                     view = null
-                    disposable.cancel(cause = ViewDestroyedException())
-                    perform { onViewDestroyed() }
+                    disposable.finish()
                 }
             }
         }.invokeOnCompletion {
-            lifecycle?.cancel(cause = ViewDestroyedException())
+            lifecycle?.finish()
         }
     }
 
-    protected open fun onViewAttached() {}
+    protected open fun onViewAttached(firstTime: Boolean = false) { }
+
+    protected open fun onViewDestroyed() { }
 
     protected fun <T> bg(execution: suspend CoroutineScope.() -> T) : Deferred<T> {
-        val process = async(context = APPLICATION_BG, parent = disposable) { execution() }
+        val process = async { execution() }
         process.invokeOnCompletion { error -> error?.let { perform { throw it } } }
         return process
     }
-
 
     protected suspend fun <T> await(block: suspend () -> T): T = bg { block() }.await()
 }

@@ -30,7 +30,7 @@ import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePr
 
 class MovieOverviewPresenter : LifecyclePresenter<MovieOverviewPresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         view?.let { view ->
             view.renderOverview(view.movie.overview)
         }

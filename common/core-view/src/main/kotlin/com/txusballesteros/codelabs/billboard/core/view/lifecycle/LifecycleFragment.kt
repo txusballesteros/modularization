@@ -27,15 +27,19 @@ package com.txusballesteros.codelabs.billboard.core.view.lifecycle
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView.Lifecycle
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.channels.ReceiveChannel
 
+@ExperimentalCoroutinesApi
 abstract class LifecycleFragment: Fragment(), LifecycleView {
-  private val lifecycleStream = ConflatedBroadcastChannel<LifecycleView.Lifecycle>()
+  private val lifecycleStream = ConflatedBroadcastChannel<Lifecycle>()
+
   private var lifecycleStatus = Lifecycle.CREATED
     set(value) {
       lifecycleStream.offer(value)
     }
+
   override val lifecycle: ReceiveChannel<Lifecycle>
     get() = lifecycleStream.openSubscription()
 

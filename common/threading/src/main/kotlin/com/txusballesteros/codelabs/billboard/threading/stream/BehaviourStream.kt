@@ -24,8 +24,10 @@
  */
 package com.txusballesteros.codelabs.billboard.threading.stream
 
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 
+@ExperimentalCoroutinesApi
 abstract class BehaviourStream<T> : Stream<T> {
     private val stream = ConflatedBroadcastChannel<T>()
 

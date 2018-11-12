@@ -24,7 +24,7 @@
  */
 package com.txusballesteros.codelabs.billboard.core.view.lifecycle
 
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.channels.ReceiveChannel
 
 interface LifecycleView {
   val lifecycle: ReceiveChannel<Lifecycle>

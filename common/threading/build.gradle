@@ -29,5 +29,7 @@ dependencies {
 
     implementation kotlin_JDK8
     api coroutines_core
+    api coroutines_common
+    api coroutines_android
     api coroutines_reactive
 }

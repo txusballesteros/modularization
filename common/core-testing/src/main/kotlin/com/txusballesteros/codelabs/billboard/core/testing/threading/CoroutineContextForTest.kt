@@ -22,10 +22,11 @@
  * under the License.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */package com.txusballesteros.codelabs.billboard.core.testing.threading
+ */
+package com.txusballesteros.codelabs.billboard.core.testing.threading
 
-import kotlinx.coroutines.experimental.CoroutineDispatcher
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlin.coroutines.CoroutineContext
 
 object CoroutineContextForTest : CoroutineDispatcher() {
   override fun isDispatchNeeded(context: CoroutineContext): Boolean = false

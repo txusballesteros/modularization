@@ -30,7 +30,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 abstract class BaseFragment : LifecycleFragment() {
     private val layoutResourceId by lazy {
         onRequestLayoutResourceId()

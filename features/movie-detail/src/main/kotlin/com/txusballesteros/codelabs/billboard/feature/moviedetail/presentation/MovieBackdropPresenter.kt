@@ -36,7 +36,7 @@ class MovieBackdropPresenter(
     private val getMovieVideos: GetMovieVideosUseCase
 ) : LifecyclePresenter<MovieBackdropPresenter.View>() {
 
-    override fun onViewAttached() {
+    override fun onViewAttached(firstTime: Boolean) {
         view?.let { view ->
             view.movie.backdrop?.let { backdrop ->
                 view.renderBackdrop(backdrop)

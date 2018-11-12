@@ -24,7 +24,7 @@
  */
 ext {
     constraint_version = "1.1.0"
-    coroutines_version = "0.23.1"
+    coroutines_version = "1.0.0"
     retrofit_version = "2.4.0"
     okHttp_version = "3.10.0"
     moshi_version = "1.6.0"
@@ -52,6 +52,8 @@ ext {
     kotlin_JDK8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.kotlin_version}"
     kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${project.kotlin_version}"
     coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}"
+    coroutines_common = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${coroutines_version}"
+    coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines_version}"
     coroutines_reactive = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${coroutines_version}"
     retrofit = "com.squareup.retrofit2:retrofit:${retrofit_version}"
     retrofit_moshi_converter = "com.squareup.retrofit2:converter-moshi:${retrofit_version}"

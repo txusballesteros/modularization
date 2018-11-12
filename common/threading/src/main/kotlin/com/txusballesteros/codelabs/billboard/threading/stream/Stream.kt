@@ -24,7 +24,7 @@
  */
 package com.txusballesteros.codelabs.billboard.threading.stream
 
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.channels.ReceiveChannel
 
 interface Stream<T> {
     fun subscribe(): ReceiveChannel<T>

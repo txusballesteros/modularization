@@ -40,7 +40,7 @@ private const val DEFAULT_SCHEMA = "billboard"
 internal val navigationImpl: Navigator = { fragment, navigationCommand ->
     fragment.activity?.let { activity ->
         val command = navigationCommand(DEFAULT_SCHEMA)
-        val intent = command.toIntent()
+        val intent = command.toIntent(fragment.context)
         val intentOptions = command.toIntentOptions(activity)
         whenSupportIntent(activity, intent) {
             if (intentOptions == null) {
@@ -54,7 +54,9 @@ internal val navigationImpl: Navigator = { fragment, navigationCommand ->
     Try.Failure(IllegalStateException())
 }
 
-private fun Command.toIntent(): Intent = Intent(Intent.ACTION_VIEW, this.uri)
+private fun Command.toIntent(context: Context?): Intent = Intent(Intent.ACTION_VIEW, this.uri).apply {
+    `package` = context?.applicationContext?.packageName
+}
 
 private fun Command.toIntentOptions(activity: Activity) : ActivityOptionsCompat? {
     return if (this.sharedElements.isNotEmpty()) {
