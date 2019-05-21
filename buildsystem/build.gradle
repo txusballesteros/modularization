@@ -26,8 +26,8 @@ ext {
     applicationId = "com.txusballesteros.codelabs.billboard"
     applicationVersionCode = 1
     applicationVersionName = "1.0.0"
-    androidCompileSdkVersion = 27
-    androidTargetSdkVersion = 27
+    androidCompileSdkVersion = 28
+    androidTargetSdkVersion = 28
     androidMinimumSdkVersion = 21
-    androidBuildToolsVersion = "27.0.3"
+    androidBuildToolsVersion = "28.0.3"
 }

@@ -51,8 +51,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     packagingOptions {
         pickFirst 'META-INF/main.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
     }
 }
 
