@@ -68,6 +68,6 @@ android {
     }
 }
 
-androidExtensions { experimental = true }
+//androidExtensions { experimental = true }
 
-kotlin { experimental { coroutines 'enable' } }
+//kotlin { experimental { coroutines 'enable' } }

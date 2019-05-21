@@ -36,9 +36,13 @@ import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.M
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MoviePosterPresenter
 import kotlinx.android.synthetic.main.fragment_movie_backdrop.*
 import kotlinx.android.synthetic.main.fragment_movie_poster.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 import java.lang.IllegalArgumentException
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MoviePosterFragment : BaseFragment(), MoviePosterPresenter.View {
     companion object {
         private const val ARGUMENT_MOVIE = "argument:movie"

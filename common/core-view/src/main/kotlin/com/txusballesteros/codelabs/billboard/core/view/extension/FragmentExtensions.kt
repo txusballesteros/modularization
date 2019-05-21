@@ -24,11 +24,9 @@
  */
 package com.txusballesteros.codelabs.billboard.core.view.extension
 
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.util.TypedValue
-import org.funktionale.option.Option
-import org.jetbrains.anko.bundleOf
+import androidx.annotation.IdRes
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 
 fun Fragment.attach(@IdRes placeHolder: Int, fragment: Fragment) =
     childFragmentManager.attach(placeHolder, fragment)

@@ -25,7 +25,7 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
 import com.txusballesteros.codelabs.billboard.core.view.extension.download
@@ -36,9 +36,13 @@ import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.M
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_movie_backdrop.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 import java.lang.IllegalArgumentException
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieBackdropFragment : BaseFragment(), MovieBackdropPresenter.View {
     companion object {
         private const val ARGUMENT_MOVIE = "argument:movie"
@@ -53,6 +57,7 @@ class MovieBackdropFragment : BaseFragment(), MovieBackdropPresenter.View {
 
     private val presenter: MovieBackdropPresenter by featureComponent.instance()
     private val navigate: Navigator by featureComponent.instance()
+
 
     override fun onRequestLayoutResourceId() = R.layout.fragment_movie_backdrop
 

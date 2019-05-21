@@ -25,11 +25,15 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.di
 
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 internal val featureModule = Kodein.Module(name = "MovieDetailFeatureModule") {
     bind<MovieDetailComposerPresenter>() with provider { MovieDetailComposerPresenter(instance()) }
     bind<MovieBackdropPresenter>() with provider { MovieBackdropPresenter(instance()) }

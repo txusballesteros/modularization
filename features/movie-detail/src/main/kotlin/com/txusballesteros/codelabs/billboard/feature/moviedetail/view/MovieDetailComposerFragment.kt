@@ -32,8 +32,12 @@ import com.txusballesteros.codelabs.billboard.core.view.extension.withArguments
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.di.featureComponent
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieDetailComposerPresenter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieDetailComposerFragment : BaseFragment(), MovieDetailComposerPresenter.View {
     companion object {
         private const val ARGUMENT_ID = "argument:id"

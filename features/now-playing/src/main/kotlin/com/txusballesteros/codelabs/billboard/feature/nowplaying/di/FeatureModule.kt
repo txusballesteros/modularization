@@ -29,12 +29,16 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.datasource
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.data.repository.NowPlayingRepository
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.usecase.GetNowPlayingMoviesUseCase
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation.NowPlayingPresenter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 internal val featureModule = Kodein.Module(name = "NowPlayingFeatureModule") {
     bind<NowPlayingDataSource>() with provider {
         NowPlayingCloudDataSource(

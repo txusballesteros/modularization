@@ -32,8 +32,11 @@ dependencies {
     implementation coroutines_core
     implementation coroutines_reactive
     implementation option_monad
-    implementation anko_common
-    implementation glide
-    api appCompat
+    implementation ktx
+    implementation (glide) {
+        exclude group: 'com.android.support', module: 'support-compat'
+    }
+    api app_compat
     api design
+    api androidx_core
 }

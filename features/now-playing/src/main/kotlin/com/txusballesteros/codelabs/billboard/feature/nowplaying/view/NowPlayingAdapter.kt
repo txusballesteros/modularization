@@ -24,10 +24,10 @@
  */
 package com.txusballesteros.codelabs.billboard.feature.nowplaying.view
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.extension.download
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.R

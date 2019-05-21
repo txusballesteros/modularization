@@ -25,10 +25,10 @@
 package com.txusballesteros.codelabs.billboard.core.view
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

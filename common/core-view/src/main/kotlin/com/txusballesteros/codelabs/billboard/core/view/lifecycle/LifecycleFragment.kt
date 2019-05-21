@@ -25,7 +25,7 @@
 package com.txusballesteros.codelabs.billboard.core.view.lifecycle
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView.Lifecycle
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel

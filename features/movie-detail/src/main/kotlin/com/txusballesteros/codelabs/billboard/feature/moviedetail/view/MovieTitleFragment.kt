@@ -32,8 +32,12 @@ import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.di.featureComponent
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieTitlePresenter
 import kotlinx.android.synthetic.main.fragment_movie_title.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieTitleFragment : BaseFragment(), MovieTitlePresenter.View {
     companion object {
         private const val ARGUMENT_MOVIE = "argument:movie"

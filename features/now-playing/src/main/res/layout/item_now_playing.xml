@@ -23,7 +23,7 @@
 *
 * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,7 +37,7 @@
     tools:layout_gravity="center"
     tools:background="#c3c3c3">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/posterView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,4 +49,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/poster" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

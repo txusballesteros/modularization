@@ -28,14 +28,12 @@ import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_BG
 import com.txusballesteros.codelabs.billboard.threading.finish
 import com.txusballesteros.codelabs.billboard.threading.perform
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlin.coroutines.CoroutineContext
 
+@ExperimentalCoroutinesApi
 abstract class LifecyclePresenter<T : LifecycleView> : CoroutineScope {
     protected var view: T? = null
     private val disposable = Job()
@@ -46,12 +44,14 @@ abstract class LifecyclePresenter<T : LifecycleView> : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = APPLICATION_BG + disposable
 
+    @ObsoleteCoroutinesApi
     fun onViewReady(view: T, firstTime: Boolean = false) {
         this.view = view
         subscribeToViewLifecycle()
         onViewAttached(firstTime)
     }
 
+    @ObsoleteCoroutinesApi
     private fun subscribeToViewLifecycle() {
         async {
             lifecycle?.consumeEach {
@@ -70,7 +70,8 @@ abstract class LifecyclePresenter<T : LifecycleView> : CoroutineScope {
 
     protected open fun onViewDestroyed() { }
 
-    protected fun <T> bg(execution: suspend CoroutineScope.() -> T) : Deferred<T> {
+    @Suppress("DeferredIsResult")
+    private fun <T> bg(execution: suspend CoroutineScope.() -> T) : Deferred<T> {
         val process = async { execution() }
         process.invokeOnCompletion { error -> error?.let { perform { throw it } } }
         return process

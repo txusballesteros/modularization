@@ -27,7 +27,11 @@ package com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieRatingPresenter : LifecyclePresenter<MovieRatingPresenter.View>() {
 
     override fun onViewAttached(firstTime: Boolean) {

@@ -26,8 +26,12 @@ package com.txusballesteros.codelabs.billboard.feature.nowplaying.di
 
 import com.txusballesteros.codelabs.billboard.core.di.coreComponent
 import com.txusballesteros.codelabs.billboard.navigation.di.navigationModule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.Kodein
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 internal val featureComponent = Kodein {
     extend(coreComponent)
     import(featureModule)

@@ -28,8 +28,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.app.Fragment
+import androidx.core.app.ActivityOptionsCompat
+import androidx.fragment.app.Fragment
 import org.funktionale.tries.Try
 
 typealias Navigator = (fragment: Fragment, navigationCommand: NavigationCommand) -> Try<Unit>
@@ -60,7 +60,7 @@ private fun Command.toIntent(context: Context?): Intent = Intent(Intent.ACTION_V
 
 private fun Command.toIntentOptions(activity: Activity) : ActivityOptionsCompat? {
     return if (this.sharedElements.isNotEmpty()) {
-        val elements = sharedElements.map { android.support.v4.util.Pair(it.view, it.key) }.toTypedArray()
+        val elements = sharedElements.map { androidx.core.util.Pair(it.view, it.key) }.toTypedArray()
         ActivityOptionsCompat.makeSceneTransitionAnimation(activity, *elements)
     } else {
         null

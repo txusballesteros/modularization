@@ -25,20 +25,24 @@
 package com.txusballesteros.codelabs.billboard.feature.nowplaying.view
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.txusballesteros.codelabs.billboard.core.domain.model.Movie
 import com.txusballesteros.codelabs.billboard.core.view.BaseFragment
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.R
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.di.featureComponent
 import com.txusballesteros.codelabs.billboard.feature.nowplaying.presentation.NowPlayingPresenter
-import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.Navigator
 import com.txusballesteros.codelabs.billboard.navigation.command.movieDetailNavigationCommand
 import kotlinx.android.synthetic.main.fragmnet_now_playing.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
     companion object {
         fun newInstance() = NowPlayingFragment()
@@ -58,7 +62,7 @@ class NowPlayingFragment : BaseFragment(), NowPlayingPresenter.View {
 
     private fun setupList() {
         val columns = resources.getInteger(R.integer.now_playing_columns)
-        val layoutManager = GridLayoutManager(context, columns, GridLayoutManager.VERTICAL, false)
+        val layoutManager = GridLayoutManager(context, columns, RecyclerView.VERTICAL, false)
         adapter = NowPlayingAdapter { view, movie ->
             sharedView = view
             presenter.onMovieTap(movie)

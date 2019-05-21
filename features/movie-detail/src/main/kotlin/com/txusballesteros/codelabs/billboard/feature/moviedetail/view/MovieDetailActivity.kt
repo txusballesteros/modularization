@@ -26,7 +26,11 @@ package com.txusballesteros.codelabs.billboard.feature.moviedetail.view
 
 import android.os.Bundle
 import com.txusballesteros.codelabs.billboard.core.view.BaseActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieDetailActivity : BaseActivity() {
     private val movieId: String
         get() = intent.data?.getQueryParameter("id") ?: throw IllegalArgumentException("The ID parameter can not be null.")

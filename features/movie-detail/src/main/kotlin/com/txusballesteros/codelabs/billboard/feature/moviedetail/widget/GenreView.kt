@@ -25,11 +25,10 @@
 package com.txusballesteros.codelabs.billboard.feature.moviedetail.widget
 
 import android.content.Context
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.flexbox.FlexboxLayout
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.R
 

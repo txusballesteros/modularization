@@ -24,10 +24,9 @@
  */
 package com.txusballesteros.codelabs.billboard.core.view.extension
 
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import org.funktionale.option.Option
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kotlin.reflect.KClass
 
 fun FragmentManager.add(@IdRes placeHolder: Int, fragment: Fragment) {

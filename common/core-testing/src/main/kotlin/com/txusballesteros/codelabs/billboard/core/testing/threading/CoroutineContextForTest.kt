@@ -26,8 +26,12 @@
 package com.txusballesteros.codelabs.billboard.core.testing.threading
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlin.coroutines.CoroutineContext
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 object CoroutineContextForTest : CoroutineDispatcher() {
   override fun isDispatchNeeded(context: CoroutineContext): Boolean = false
   override fun dispatch(context: CoroutineContext, block: Runnable) { block.run() }

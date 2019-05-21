@@ -28,10 +28,14 @@ import com.nhaarman.mockito_kotlin.reset
 import com.txusballesteros.codelabs.billboard.core.testing.threading.CoroutineContextForTest
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_BG
 import com.txusballesteros.codelabs.billboard.threading.APPLICATION_MAIN
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 @Suppress("IllegalIdentifier")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class UnitTest {

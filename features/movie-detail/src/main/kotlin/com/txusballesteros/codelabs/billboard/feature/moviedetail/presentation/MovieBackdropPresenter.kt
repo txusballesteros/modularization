@@ -31,7 +31,11 @@ import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePr
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.command.youtubeNavigationCommand
 import com.txusballesteros.codelabs.billboard.threading.perform
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieBackdropPresenter(
     private val getMovieVideos: GetMovieVideosUseCase
 ) : LifecyclePresenter<MovieBackdropPresenter.View>() {

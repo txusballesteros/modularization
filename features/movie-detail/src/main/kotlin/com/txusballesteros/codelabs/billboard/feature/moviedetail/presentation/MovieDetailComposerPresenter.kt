@@ -29,7 +29,11 @@ import com.txusballesteros.codelabs.billboard.core.view.lifecycle.LifecycleView
 import com.txusballesteros.codelabs.billboard.core.view.presentation.LifecyclePresenter
 import com.txusballesteros.codelabs.billboard.core.domain.usecase.movie.GetMovieByIdUseCase
 import com.txusballesteros.codelabs.billboard.threading.perform
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieDetailComposerPresenter(
     private val getMovieById: GetMovieByIdUseCase
 ) : LifecyclePresenter<MovieDetailComposerPresenter.View>() {

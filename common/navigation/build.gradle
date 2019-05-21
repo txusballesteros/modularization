@@ -28,7 +28,7 @@ dependencies {
     implementation project(':common:core-view')
 
     implementation kotlin_JDK8
-    implementation appCompat
+    implementation app_compat
     implementation kodein
     implementation try_monad
 }

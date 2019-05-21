@@ -33,8 +33,12 @@ import com.txusballesteros.codelabs.billboard.feature.moviedetail.di.featureComp
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.presentation.MovieGenresPresenter
 import com.txusballesteros.codelabs.billboard.feature.moviedetail.widget.GenreView
 import kotlinx.android.synthetic.main.fragment_movie_genres.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kodein.di.generic.instance
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class MovieGenresFragment : BaseFragment(), MovieGenresPresenter.View {
     companion object {
         private const val ARGUMENT_MOVIE = "argument:movie"

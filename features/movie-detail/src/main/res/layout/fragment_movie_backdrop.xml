@@ -23,7 +23,7 @@
 *
 * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -59,4 +59,4 @@
         android:background="@drawable/backdrop_decorator"
         />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

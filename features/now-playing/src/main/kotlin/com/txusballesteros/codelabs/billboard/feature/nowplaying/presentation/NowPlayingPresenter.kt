@@ -31,7 +31,11 @@ import com.txusballesteros.codelabs.billboard.feature.nowplaying.domain.usecase.
 import com.txusballesteros.codelabs.billboard.navigation.NavigationCommand
 import com.txusballesteros.codelabs.billboard.navigation.command.movieDetailNavigationCommand
 import com.txusballesteros.codelabs.billboard.threading.perform
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class NowPlayingPresenter(
     private val getNowPlayingMovies: GetNowPlayingMoviesUseCase
 ) : LifecyclePresenter<NowPlayingPresenter.View>() {

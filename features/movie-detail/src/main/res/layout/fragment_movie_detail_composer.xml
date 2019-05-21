@@ -23,7 +23,7 @@
 *
 * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/backdrop_holder"
         />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -119,5 +119,5 @@
                 />
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</android.support.constraint.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
